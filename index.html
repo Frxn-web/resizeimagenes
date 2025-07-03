@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SocialResize Pro - Redimensionador Para Creadores de Contenido | 2025</title>
-    <meta name="description" content="Herramienta definitiva para crear contenido visual perfecto: banners de YouTube, logos, fotos de perfil y más. Con presets para todas las plataformas sociales.">
-    <meta name="keywords" content="redimensionar para youtube, instagram, tiktok, facebook, twitter, linkedin, logos, banners, creadores de contenido">
+    <title>SocialResize Pro - Redimensionador de Imágenes para Redes y Documentos | 2025</title>
+    <meta name="description" content="Herramienta para redimensionar imágenes para redes sociales, fotos de pasaporte, documentos y tamaños personalizados. Con presets y optimización para creadores.">
+    <meta name="keywords" content="redimensionar imagen, foto pasaporte, tamaño personalizado, youtube, instagram, tiktok, facebook, adsterra">
     
     <style>
-        /* Variables CSS avanzadas con paleta de creador */
+        /* (El CSS es el mismo que el anterior, con la adición de estilos para los anuncios) */
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --youtube-gradient: linear-gradient(135deg, #ff0000 0%, #ff4444 100%);
@@ -47,1043 +47,135 @@
             --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-primary); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; min-height: 100vh; overflow-x: hidden; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 2rem; }
+        .main-card { background: var(--bg-card); backdrop-filter: var(--blur-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: 2.5rem; box-shadow: var(--shadow-soft); position: relative; overflow: hidden; }
+        .upload-area { border: 2px dashed var(--border-color); border-radius: var(--border-radius); padding: 3rem 2rem; text-align: center; cursor: pointer; transition: var(--transition); position: relative; overflow: hidden; background: var(--bg-preset); }
+        .upload-area:hover, .upload-area.dragover { border-color: var(--text-accent); background: rgba(102, 126, 234, 0.08); }
+        .platform-tabs, .presets-grid, .controls, .results, .sidebar { margin-top: 1.5rem; }
+        .platform-tab { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 25px; padding: 0.6rem 1.2rem; cursor: pointer; transition: var(--transition); }
+        .platform-tab.active { background: var(--primary-gradient); color: white; box-shadow: var(--shadow-hover); }
+        .preset-card { background: var(--bg-preset); border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: 1rem; cursor: pointer; transition: var(--transition); }
+        .preset-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .presets-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+        .platform-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .controls { display: none; animation: fadeInUp 0.5s ease; }
+        .results { display: none; animation: fadeInUp 0.5s ease; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .preview-image { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color); }
+        .sidebar-card { background: var(--bg-card); backdrop-filter: var(--blur-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius); padding: 1.5rem; box-shadow: var(--shadow-soft); }
+        .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+        .input-group input, .input-group select { width: 100%; padding: 0.8rem; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--border-radius); color: var(--text-primary); font-size: 1rem; }
+        .process-btn { background: var(--primary-gradient); border: none; border-radius: var(--border-radius); padding: 1.2rem 2rem; color: white; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: var(--transition); width: 100%; margin-top: 1.5rem; }
+        .process-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top-color: #fff; animation: spin 1s ease-in-out infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        body {
-            font-family: var(--font-primary);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Fondo animado mejorado */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
-            z-index: -1;
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(1deg); }
-        }
-
-        /* Header moderno */
-        .header {
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: var(--blur-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo::before {
-            content: '🎨';
-            font-size: 1.5rem;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .theme-toggle, .batch-mode-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            padding: 0.5rem 1rem;
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: var(--transition);
-            backdrop-filter: var(--blur-bg);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .theme-toggle:hover, .batch-mode-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        /* Contenedor principal mejorado */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 2rem;
-        }
-
-        @media (max-width: 1200px) {
-            .container {
-                grid-template-columns: 1fr;
-                padding: 1rem;
-            }
-        }
-
-        /* Card principal con efectos mejorados */
-        .main-card {
-            background: var(--bg-card);
-            backdrop-filter: var(--blur-bg);
-            border: 1px solid var(--border-color);
+        /* Estilos para Espacios Publicitarios */
+        .ad-space {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px dashed var(--border-color);
             border-radius: var(--border-radius);
-            padding: 2.5rem;
-            box-shadow: var(--shadow-soft);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .main-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary-gradient);
-        }
-
-        .main-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .card-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .card-subtitle {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        /* Área de upload premium */
-        .upload-area {
-            border: 2px dashed var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 3rem 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            background: var(--bg-preset);
-        }
-
-        .upload-area::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.6s;
-        }
-
-        .upload-area:hover::before {
-            left: 100%;
-        }
-
-        .upload-area:hover {
-            border-color: var(--text-accent);
-            background: rgba(102, 126, 234, 0.08);
-            transform: scale(1.02);
-        }
-
-        .upload-area.dragover {
-            border-color: var(--text-accent);
-            background: rgba(102, 126, 234, 0.15);
-            transform: scale(1.02);
-        }
-
-        .upload-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            opacity: 0.8;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        .upload-text {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .upload-hint {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .file-formats {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .format-badge {
-            background: var(--bg-secondary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        /* Sección de presets revolucionaria */
-        .presets-section {
-            margin: 2rem 0;
-        }
-
-        .presets-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-accent);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .presets-title::before {
-            content: '⚡';
-        }
-
-        .platform-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .platform-tab {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 25px;
-            padding: 0.6rem 1.2rem;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .platform-tab.active {
-            background: var(--primary-gradient);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .platform-tab:hover:not(.active) {
-            background: var(--bg-preset);
-            transform: translateY(-1px);
-        }
-
-        /* Presets grid mejorado */
-        .presets-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .preset-card {
-            background: var(--bg-preset);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .preset-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--primary-gradient);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .preset-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .preset-card:hover {
-            background: rgba(102, 126, 234, 0.1);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .preset-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .preset-name {
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .preset-icon {
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-
-        .preset-dimensions {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .preset-description {
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            line-height: 1.4;
-        }
-
-        /* Controles avanzados */
-        .controls {
-            display: none;
-            animation: fadeInUp 0.6s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .controls-section {
-            background: var(--bg-preset);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border: 1px solid var(--border-color);
-        }
-
-        .controls-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-accent);
-        }
-
-        .controls-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .input-group {
-            position: relative;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .input-group input, .input-group select {
-            width: 100%;
-            padding: 0.8rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .input-group input:focus, .input-group select:focus {
-            outline: none;
-            border-color: var(--text-accent);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            transform: translateY(-1px);
-        }
-
-        .quality-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .quality-slider {
-            flex: 1;
-            -webkit-appearance: none;
-            appearance: none;
-            height: 6px;
-            background: var(--bg-secondary);
-            border-radius: 3px;
-            outline: none;
-        }
-
-        .quality-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        
-        .quality-slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .quality-value {
-            background: var(--bg-secondary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            min-width: 50px;
-            text-align: center;
-        }
-
-        /* Opciones avanzadas */
-        .advanced-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem;
-            background: var(--bg-secondary);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .checkbox-group:hover {
-            background: var(--bg-preset);
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--text-accent);
-        }
-
-        .checkbox-group label {
-            margin: 0;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        /* Botón principal mejorado */
-        .process-btn {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: var(--border-radius);
-            padding: 1.2rem 2rem;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            width: 100%;
-            margin-top: 1.5rem;
-            position: relative;
-            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .process-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s;
-        }
-
-        .process-btn:hover::before {
-            left: 100%;
-        }
-
-        .process-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 48px rgba(102, 126, 234, 0.4);
-        }
-
-        .process-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .process-btn.processing {
-            background: var(--warning-gradient);
-        }
-
-        /* Área de resultados premium */
-        .results {
-            display: none;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            animation: fadeInUp 0.6s ease;
-        }
-
-        .results-header {
+            color: var(--text-secondary);
+            font-family: monospace;
+            margin: 2rem auto;
             text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .results-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: var(--success-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-
-        .results-subtitle {
-            color: var(--text-secondary);
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        @media (max-width: 768px) {
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .result-item {
-            background: var(--bg-secondary);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .result-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--primary-gradient);
-        }
-
-        .result-item h4 {
-            margin-bottom: 1rem;
-            color: var(--text-accent);
-            font-size: 1.1rem;
-        }
-
-        .preview-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: calc(var(--border-radius) / 2);
-            border: 1px solid var(--border-color);
-            margin: 1rem 0;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .image-info {
-            background: var(--bg-preset);
             padding: 1rem;
-            border-radius: calc(var(--border-radius) / 2);
-            margin: 1rem 0;
         }
-
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+        .ad-sidebar {
+            min-height: 250px; /* Adsterra 300x250 o similar */
         }
-
-        .info-row:last-child {
-            margin-bottom: 0;
-        }
-
-        .info-label {
-            color: var(--text-secondary);
-        }
-
-        .info-value {
-            font-weight: 600;
-        }
-
-        .download-btn {
-            background: var(--success-gradient);
-            border: none;
-            border-radius: var(--border-radius);
-            padding: 1rem 1.5rem;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
+        .ad-results-banner {
+            min-height: 90px; /* Adsterra 728x90 o 468x60 */
             width: 100%;
-            margin-top: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+        }
+        .ad-bottom-banner {
+             min-height: 90px; /* Adsterra 728x90 o 468x60 */
+             width: 100%;
         }
 
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
-        }
 
-        /* Sidebar mejorada */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .sidebar-card {
-            background: var(--bg-card);
-            backdrop-filter: var(--blur-bg);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--shadow-soft);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sidebar-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--primary-gradient);
-        }
-
-        .sidebar-card h3 {
-            color: var(--text-accent);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .feature-list, .tip-list {
-            list-style: none;
-        }
-
-        .feature-list li, .tip-list li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .feature-list li:last-child, .tip-list li:last-child {
-            border-bottom: none;
-        }
-
-        .feature-list li::before {
-            content: '✨';
-            font-size: 1rem;
-        }
-
-        .tip-list li::before {
-            content: '💡';
-            font-size: 1rem;
-        }
-
-        /* Estadísticas en tiempo real */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .stat-item {
-            background: var(--bg-preset);
-            padding: 1rem;
-            border-radius: calc(var(--border-radius) / 2);
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-accent);
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-top: 0.3rem;
-        }
-
-        /* Elementos de carga mejorados */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: var(--bg-secondary);
-            border-radius: 3px;
-            overflow: hidden;
-            margin: 1rem 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--primary-gradient);
-            width: 0%;
-            transition: width 0.3s ease;
-            border-radius: 3px;
-        }
-
-        /* Notificaciones toast */
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--bg-card);
-            backdrop-filter: var(--blur-bg);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 1rem 1.5rem;
-            box-shadow: var(--shadow-soft);
-            z-index: 10000;
-            transform: translateX(400px);
-            transition: var(--transition);
-        }
-
-        .toast.show {
-            transform: translateX(0);
-        }
-
-        .toast.success {
-            border-left: 4px solid #4facfe;
-        }
-
-        .toast.error {
-            border-left: 4px solid #ff4757;
-        }
-
-        /* Responsive mejorado */
-        @media (max-width: 768px) {
-            .header-content {
-                padding: 0 1rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .main-card {
-                padding: 1.5rem;
-            }
-            
-            .controls-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .platform-tabs {
-                justify-content: center;
-            }
-            
-            .presets-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .advanced-options {
-                grid-template-columns: 1fr;
-            }
-
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0.5rem;
-            }
-            
-            .upload-area {
-                padding: 2rem 1rem;
-            }
-            
-            .upload-icon {
-                font-size: 2.5rem;
-            }
-            
-            .card-title {
-                font-size: 1.8rem;
-            }
-        }
+        @media (max-width: 1200px) { .container { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .results-grid { grid-template-columns: 1fr; } .main-card { padding: 1.5rem; } }
     </style>
 </head>
 <body data-theme="dark">
-    <header class="header">
-        <div class="header-content">
-            <div class="logo">SocialResize Pro</div>
-            <div class="header-actions">
-                <button class="batch-mode-btn" onclick="toggleBatchMode()">
-                    <span>📦</span> Modo Lote
-                </button>
-                <button class="theme-toggle" onclick="toggleTheme()">
-                    <span id="theme-icon">🌙</span> Tema
-                </button>
-            </div>
-        </div>
-    </header>
-
     <div class="container">
         <main>
             <div class="main-card">
-                <h1 class="card-title">El Redimensionador Definitivo para Creadores</h1>
-                <p class="card-subtitle">Crea contenido visual perfecto para YouTube, Instagram, TikTok, LinkedIn y más. Con presets profesionales y optimización inteligente para cada plataforma.</p>
+                <h1>El Redimensionador de Imágenes Definitivo</h1>
+                <p>Crea contenido para redes sociales, fotos para documentos y más con tamaños perfectos.</p>
                 
                 <div class="upload-area" id="uploadArea">
-                    <div class="upload-icon">🎨</div>
-                    <div class="upload-text">Arrastra tu imagen aquí o haz clic para seleccionar</div>
-                    <div class="upload-hint">Perfecto para logos, banners, fotos de perfil y más</div>
-                    <div class="file-formats">
-                        <span class="format-badge">JPG</span>
-                        <span class="format-badge">PNG</span>
-                        <span class="format-badge">WEBP</span>
-                        <span class="format-badge">GIF</span>
-                        <span class="format-badge">SVG</span>
-                    </div>
+                    <div class="upload-icon">🖼️</div>
+                    <p><strong>Arrastra tu imagen aquí</strong></p>
+                    <p>o haz clic para seleccionar un archivo</p>
                     <input type="file" id="fileInput" accept="image/*" style="display: none;">
                 </div>
 
-                <div class="presets-section">
-                    <div class="presets-title">Presets Profesionales por Plataforma</div>
-                    
-                    <div class="platform-tabs">
-                        <button class="platform-tab active" data-platform="youtube">
-                            📺 YouTube
-                        </button>
-                        <button class="platform-tab" data-platform="instagram">
-                            📸 Instagram
-                        </button>
-                        <button class="platform-tab" data-platform="tiktok">
-                            🎵 TikTok
-                        </button>
-                        <button class="platform-tab" data-platform="facebook">
-                            📘 Facebook
-                        </button>
-                        <button class="platform-tab" data-platform="twitter">
-                            🐦 Twitter/X
-                        </button>
-                        <button class="platform-tab" data-platform="linkedin">
-                            💼 LinkedIn
-                        </button>
-                        <button class="platform-tab" data-platform="logos">
-                            🏷️ Logos
-                        </button>
-                        <button class="platform-tab" data-platform="web">
-                            🌐 Web
-                        </button>
+                <div class="controls" id="controls">
+                    <div class="presets-section">
+                        <h3>Presets por Categoría</h3>
+                        <div class="platform-tabs">
+                             <button class="platform-tab active" data-platform="youtube">📺 YouTube</button>
+                             <button class="platform-tab" data-platform="instagram">📸 Instagram</button>
+                             <button class="platform-tab" data-platform="documents">🪪 Documentos</button>
+                             <button class="platform-tab" data-platform="facebook">📘 Facebook</button>
+                             <button class="platform-tab" data-platform="twitter">🐦 Twitter/X</button>
+                        </div>
+                        <div class="presets-grid" id="presetsGrid"></div>
                     </div>
 
-                    <div class="presets-grid" id="presetsGrid">
-                        </div>
-                </div>
-
-                <div class="controls" id="controls">
-                    <div class="controls-section">
-                        <div class="controls-title">🎛️ Configuración Personalizada</div>
-                        
-                        <div class="controls-grid">
+                    <div class="custom-size-section">
+                         <h3>Tamaño Personalizado</h3>
+                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
                             <div class="input-group">
                                 <label for="width">Ancho (px)</label>
-                                <input type="number" id="width" min="1" max="10000" placeholder="1920">
+                                <input type="number" id="width" min="1" placeholder="1920">
                             </div>
                             <div class="input-group">
                                 <label for="height">Alto (px)</label>
-                                <input type="number" id="height" min="1" max="10000" placeholder="1080">
+                                <input type="number" id="height" min="1" placeholder="1080">
                             </div>
-                            <div class="input-group">
-                                <label for="quality">Calidad de Compresión</label>
-                                <div class="quality-container">
-                                    <input type="range" id="quality" class="quality-slider" min="1" max="100" value="85">
-                                    <span class="quality-value" id="qualityValue">85%</span>
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <label for="format">Formato de Salida</label>
-                                <select id="format">
-                                    <option value="original">🔄 Mantener Original</option>
-                                    <option value="jpeg">📷 JPEG (Fotos)</option>
-                                    <option value="png">🖼️ PNG (Transparencia)</option>
-                                    <option value="webp">⚡ WebP (Web Optimizado)</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="advanced-options">
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="keepAspect" checked>
-                                <label for="keepAspect">🔒 Mantener Proporción</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="smartResize">
-                                <label for="smartResize">🧠 Redimensionamiento Inteligente</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="autoOptimize">
-                                <label for="autoOptimize">⚡ Optimización Automática</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="preserveMetadata">
-                                <label for="preserveMetadata">📋 Conservar Metadatos</label>
-                            </div>
-                        </div>
-
-                        <button class="process-btn" id="processBtn" onclick="processImage()">
-                            <span id="btnText">🚀 Crear Imagen Perfecta</span>
-                        </button>
-
-                        <div class="progress-bar" id="progressBar" style="display: none;">
-                            <div class="progress-fill" id="progressFill"></div>
-                        </div>
+                         </div>
+                         <div style="margin-top: 1rem;">
+                            <input type="checkbox" id="keepAspect" checked>
+                            <label for="keepAspect">Mantener Proporción</label>
+                         </div>
                     </div>
+                    
+                    <button class="process-btn" id="processBtn">
+                        <span id="btnText">Redimensionar Imagen</span>
+                    </button>
+                </div>
+
+                <div class="ad-space ad-bottom-banner">
+                    <p>Espacio Publicitario (Banner)</p>
                 </div>
 
                 <div class="results" id="results">
-                    <div class="results-header">
-                        <div class="results-title">🎉 ¡Imagen Lista para Conquistar!</div>
-                        <div class="results-subtitle">Tu contenido optimizado y listo para brillar en las redes</div>
-                    </div>
+                    <h2>🎉 ¡Listo! Tu imagen ha sido transformada.</h2>
                     
+                    <div class="ad-space ad-results-banner">
+                       <p>Espacio Publicitario (Resultados)</p>
+                    </div>
+
                     <div class="results-grid">
                         <div class="result-item">
-                            <h4>📷 Imagen Original</h4>
+                            <h4>📷 Original</h4>
                             <img id="originalPreview" class="preview-image" alt="Vista previa original">
-                            <div class="image-info" id="originalInfo"></div>
+                            <div id="originalInfo"></div>
                         </div>
                         <div class="result-item">
-                            <h4>✨ Imagen Optimizada</h4>
+                            <h4>✨ Redimensionada</h4>
                             <img id="processedPreview" class="preview-image" alt="Vista previa procesada">
-                            <div class="image-info" id="processedInfo"></div>
-                            <button class="download-btn" id="downloadBtn">
-                                📥 Descargar Imagen Perfecta
-                            </button>
+                            <div id="processedInfo"></div>
+                            <a id="downloadBtn" class="process-btn" style="text-decoration: none; display: block; text-align: center;">📥 Descargar</a>
                         </div>
                     </div>
                 </div>
@@ -1092,618 +184,231 @@
 
         <aside class="sidebar">
             <div class="sidebar-card">
-                <h3>✨ Características Premium</h3>
-                <ul class="feature-list">
-                    <li>Presets para 50+ plataformas sociales</li>
-                    <li>Optimización automática con IA</li>
-                    <li>Compresión inteligente sin pérdida de calidad</li>
-                    <li>Redimensionamiento por lotes</li>
-                    <li>Conversión entre múltiples formatos</li>
-                    <li>Procesamiento 100% privado y local</li>
-                    <li>Sin marcas de agua ni límites</li>
-                    <li>Presets actualizados constantemente</li>
-                </ul>
-            </div>
-
-            <div class="sidebar-card">
-                <h3>📊 Información de la Imagen</h3>
-                <div id="imageInfo">
-                    <p style="text-align: center; color: var(--text-secondary); padding: 2rem 0;">
-                        🎨 Selecciona una imagen para ver sus propiedades detalladas
-                    </p>
+                 <div class="ad-space ad-sidebar">
+                    <p>Espacio Publicitario (Sidebar)</p>
                 </div>
             </div>
-
             <div class="sidebar-card">
-                <h3>💡 Consejos de Creador Pro</h3>
-                <ul class="tip-list">
-                    <li>Usa WebP para web (hasta 35% menos peso)</li>
-                    <li>PNG para logos con transparencia</li>
-                    <li>JPEG para fotografías y fondos</li>
-                    <li>Mantén calidad >80% para impresión</li>
-                    <li>Optimiza para móviles (la mayoría del tráfico)</li>
-                    <li>Considera el contexto de cada plataforma</li>
-                    <li>Prueba diferentes ratios para engagement</li>
-                    <li>Siempre ten versiones de respaldo</li>
+                <h3>💡 Consejos</h3>
+                <ul>
+                    <li>Para pasaportes, usa un fondo blanco o de color claro.</li>
+                    <li>Usa WebP para imágenes en la web para una carga más rápida.</li>
+                    <li>Un PNG es mejor si tu imagen tiene un fondo transparente.</li>
                 </ul>
             </div>
-
-            <div class="sidebar-card">
-                <h3>📈 Estadísticas de Uso</h3>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-value" id="imagesProcessed">0</div>
-                        <div class="stat-label">Imágenes Procesadas</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="spaceSaved">0MB</div>
-                        <div class="stat-label">Espacio Ahorrado</div>
-                    </div>
-                </div>
+             <div class="sidebar-card">
+                <h3>📊 Estadísticas</h3>
+                <p>Imágenes Procesadas: <span id="imagesProcessed">0</span></p>
             </div>
         </aside>
     </div>
 
     <script>
-        // Base de datos completa de presets por plataforma
-        const platformPresets = {
-            youtube: [
-                { name: "Banner de Canal", width: 2560, height: 1440, icon: "🎬", description: "Banner principal que se ve en todos los dispositivos" },
-                { name: "Thumbnail Video", width: 1280, height: 720, icon: "🖼️", description: "Miniatura perfecta para videos, ratio 16:9" },
-                { name: "Logo de Canal", width: 800, height: 800, icon: "🎯", description: "Logo circular para el canal" },
-                { name: "Watermark", width: 150, height: 150, icon: "💧", description: "Marca de agua para videos" },
-                { name: "Community Post", width: 1200, height: 900, icon: "📝", description: "Imagen para publicaciones de comunidad" },
-                { name: "Short Thumbnail", width: 1080, height: 1920, icon: "📱", description: "Miniatura vertical para YouTube Shorts" }
-            ],
-            instagram: [
-                { name: "Post Cuadrado", width: 1080, height: 1080, icon: "⬜", description: "Formato clásico de Instagram, perfecto balance" },
-                { name: "Story", width: 1080, height: 1920, icon: "📖", description: "Historias verticales, formato 9:16" },
-                { name: "Reel", width: 1080, height: 1920, icon: "🎥", description: "Videos cortos verticales" },
-                { name: "IGTV Cover", width: 420, height: 654, icon: "📺", description: "Portada para videos IGTV" },
-                { name: "Post Horizontal", width: 1080, height: 566, icon: "📐", description: "Formato paisaje 1.91:1" },
-                { name: "Post Vertical", width: 1080, height: 1350, icon: "📏", description: "Formato retrato 4:5" },
-                { name: "Profile Picture", width: 320, height: 320, icon: "👤", description: "Foto de perfil circular" },
-                { name: "Highlight Cover", width: 161, height: 161, icon: "⭐", description: "Portada para historias destacadas" }
-            ],
-            tiktok: [
-                { name: "Video Principal", width: 1080, height: 1920, icon: "🎵", description: "Formato vertical estándar 9:16" },
-                { name: "Profile Picture", width: 200, height: 200, icon: "👤", description: "Foto de perfil cuadrada" },
-                { name: "Live Stream", width: 1080, height: 1920, icon: "🔴", description: "Transmisión en vivo vertical" },
-                { name: "Ads Vertical", width: 1080, height: 1920, icon: "📢", description: "Anuncios verticales en TikTok" },
-                { name: "Thumbnail", width: 1080, height: 1920, icon: "🖼️", description: "Miniatura para videos" }
-            ],
-            facebook: [
-                { name: "Cover Photo", width: 1200, height: 630, icon: "🏞️", description: "Foto de portada del perfil" },
-                { name: "Post Image", width: 1200, height: 900, icon: "📝", description: "Imagen para publicaciones" },
-                { name: "Profile Picture", width: 400, height: 400, icon: "👤", description: "Foto de perfil" },
-                { name: "Event Cover", width: 1920, height: 1080, icon: "🎉", description: "Portada para eventos" },
-                { name: "Story", width: 1080, height: 1920, icon: "📖", description: "Historias de Facebook" },
-                { name: "Link Preview", width: 1200, height: 630, icon: "🔗", description: "Vista previa de enlaces compartidos" },
-                { name: "Marketplace", width: 1200, height: 1200, icon: "🛒", description: "Imagen para Facebook Marketplace" }
-            ],
-            twitter: [
-                { name: "Header", width: 1500, height: 500, icon: "🎨", description: "Banner del perfil de Twitter/X" },
-                { name: "Post Image", width: 1200, height: 675, icon: "📝", description: "Imagen para tweets, ratio 16:9" },
-                { name: "Profile Picture", width: 400, height: 400, icon: "👤", description: "Foto de perfil circular" },
-                { name: "Card Image", width: 1200, height: 628, icon: "🃏", description: "Imagen para Twitter Cards" },
-                { name: "Thread Image", width: 1080, height: 1080, icon: "🧵", description: "Imagen cuadrada para hilos" },
-                { name: "Space Cover", width: 1200, height: 600, icon: "🎙️", description: "Portada para Twitter Spaces" }
-            ],
-            linkedin: [
-                { name: "Cover Photo", width: 1584, height: 396, icon: "🏢", description: "Banner del perfil profesional" },
-                { name: "Post Image", width: 1200, height: 627, icon: "📊", description: "Imagen para publicaciones" },
-                { name: "Profile Picture", width: 400, height: 400, icon: "👔", description: "Foto de perfil profesional" },
-                { name: "Company Logo", width: 300, height: 300, icon: "🏪", description: "Logo de página de empresa" },
-                { name: "Article Header", width: 1280, height: 720, icon: "📰", description: "Cabecera para artículos" },
-                { name: "Event Cover", width: 1776, height: 444, icon: "📅", description: "Portada para eventos profesionales" }
-            ],
-            logos: [
-                { name: "Logo Cuadrado", width: 512, height: 512, icon: "⬜", description: "Logo cuadrado para aplicaciones" },
-                { name: "Logo Horizontal", width: 1024, height: 256, icon: "➖", description: "Logo horizontal para headers" },
-                { name: "Logo Vertical", width: 256, height: 1024, icon: "⬇️", description: "Logo vertical para sidebars" },
-                { name: "Favicon", width: 32, height: 32, icon: "🔖", description: "Icono para navegadores web" },
-                { name: "App Icon iOS", width: 1024, height: 1024, icon: "📱", description: "Icono para App Store" },
-                { name: "App Icon Android", width: 512, height: 512, icon: "🤖", description: "Icono para Google Play" },
-                { name: "Watermark", width: 200, height: 50, icon: "💧", description: "Marca de agua transparente" },
-                { name: "Business Card", width: 1050, height: 600, icon: "💼", description: "Logo para tarjetas de visita" }
-            ],
-            web: [
-                { name: "Hero Banner", width: 1920, height: 1080, icon: "🎭", description: "Banner principal de sitio web" },
-                { name: "Blog Header", width: 1200, height: 600, icon: "📝", description: "Cabecera para artículos de blog" },
-                { name: "Open Graph", width: 1200, height: 630, icon: "🌐", description: "Imagen para compartir en redes" },
-                { name: "Thumbnail", width: 800, height: 450, icon: "🖼️", description: "Miniatura para videos/artículos" },
-                { name: "Gallery Image", width: 1080, height: 1080, icon: "🖼️", description: "Imagen cuadrada para galerías" },
-                { name: "Banner Mobile", width: 768, height: 400, icon: "📱", description: "Banner optimizado para móviles" },
-                { name: "Email Header", width: 600, height: 200, icon: "📧", description: "Cabecera para newsletters" },
-                { name: "Product Image", width: 1000, height: 1000, icon: "📦", description: "Imagen de producto para e-commerce" }
-            ]
-        };
-
-        // Variables globales
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- VARIABLES GLOBALES ---
         let currentImage = null;
         let originalFile = null;
-        let currentPlatform = 'youtube';
-        let batchMode = false;
         let processedCount = 0;
-        let totalSpaceSaved = 0;
-        let processingStartTime;
 
-        // --- INICIALIZACIÓN ---
-        document.addEventListener('DOMContentLoaded', () => {
-            setupEventListeners();
-            loadPresets(currentPlatform);
-            loadStats();
-            loadSettings();
-        });
-
-        function setupEventListeners() {
-            const uploadArea = document.getElementById('uploadArea');
-            const fileInput = document.getElementById('fileInput');
-            const widthInput = document.getElementById('width');
-            const heightInput = document.getElementById('height');
-            const qualityInput = document.getElementById('quality');
-
-            // Eventos de carga
-            uploadArea.addEventListener('click', () => fileInput.click());
-            uploadArea.addEventListener('dragover', handleDragOver);
-            uploadArea.addEventListener('dragleave', handleDragLeave);
-            uploadArea.addEventListener('drop', handleDrop);
-            fileInput.addEventListener('change', handleFileSelect);
-
-            // Eventos de controles
-            widthInput.addEventListener('input', handleWidthChange);
-            heightInput.addEventListener('input', handleHeightChange);
-            qualityInput.addEventListener('input', updateQualityDisplay);
-
-            // Pestañas de plataforma
-            document.querySelectorAll('.platform-tab').forEach(tab => {
-                tab.addEventListener('click', () => switchPlatform(tab.dataset.platform));
-            });
-            
-            // Auto-guardado de configuración
-            document.getElementById('controls').addEventListener('change', saveSettings);
-        }
+        // --- ELEMENTOS DEL DOM ---
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const controls = document.getElementById('controls');
+        const results = document.getElementById('results');
+        const widthInput = document.getElementById('width');
+        const heightInput = document.getElementById('height');
+        const keepAspectCheckbox = document.getElementById('keepAspect');
+        const processBtn = document.getElementById('processBtn');
+        const btnText = document.getElementById('btnText');
+        const presetsGrid = document.getElementById('presetsGrid');
+        const platformTabs = document.querySelectorAll('.platform-tab');
+        const originalPreview = document.getElementById('originalPreview');
+        const processedPreview = document.getElementById('processedPreview');
+        const originalInfo = document.getElementById('originalInfo');
+        const processedInfo = document.getElementById('processedInfo');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const imagesProcessedSpan = document.getElementById('imagesProcessed');
+        
+        // --- BASE DE DATOS DE PRESETS ---
+        const platformPresets = {
+            documents: [
+                { name: "Pasaporte (EE.UU.)", width: 600, height: 600, icon: "🇺🇸", description: "2x2 pulgadas a 300 DPI" },
+                { name: "Pasaporte (Europa)", width: 413, height: 531, icon: "🇪🇺", description: "35x45 mm a 300 DPI" },
+                { name: "Cédula/ID Card", width: 255, height: 325, icon: "🪪", description: "Tamaño común para DNI" },
+            ],
+            youtube: [
+                { name: "Banner de Canal", width: 2560, height: 1440, icon: "🎬", description: "Para todos los dispositivos" },
+                { name: "Thumbnail Video", width: 1280, height: 720, icon: "🖼️", description: "Ratio 16:9" },
+            ],
+            instagram: [
+                { name: "Post Cuadrado", width: 1080, height: 1080, icon: "⬜", description: "Clásico 1:1" },
+                { name: "Story / Reel", width: 1080, height: 1920, icon: "📖", description: "Vertical 9:16" },
+            ],
+            facebook: [
+                { name: "Cover Photo", width: 851, height: 315, icon: "🏞️", description: "Portada de perfil" },
+                { name: "Post Image", width: 1200, height: 630, icon: "📝", description: "Para publicaciones" },
+            ],
+            twitter: [
+                { name: "Header", width: 1500, height: 500, icon: "🎨", description: "Banner del perfil" },
+                { name: "Post Image", width: 1024, height: 512, icon: "📝", description: "Ratio 2:1" },
+            ],
+        };
 
         // --- MANEJO DE ARCHIVOS ---
-        function handleDragOver(e) {
+        uploadArea.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', handleFileSelect);
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+        function preventDefaults(e) {
             e.preventDefault();
-            e.currentTarget.classList.add('dragover');
+            e.stopPropagation();
         }
-
-        function handleDragLeave(e) {
-            e.currentTarget.classList.remove('dragover');
-        }
-
+        uploadArea.addEventListener('drop', handleDrop, false);
+        
         function handleDrop(e) {
-            e.preventDefault();
-            e.currentTarget.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                processFile(files[0]);
-            }
+            let dt = e.dataTransfer;
+            let file = dt.files[0];
+            handleFile(file);
         }
 
         function handleFileSelect(e) {
-            const file = e.target.files[0];
-            if (file) {
-                processFile(file);
-            }
+            handleFile(e.target.files[0]);
         }
-
-        function processFile(file) {
-            if (!file.type.startsWith('image/')) {
-                showToast('Por favor selecciona un archivo de imagen válido', 'error');
+        
+        function handleFile(file) {
+            if (!file || !file.type.startsWith('image/')) {
+                alert('Por favor, selecciona un archivo de imagen válido.');
                 return;
             }
-
-            if (file.size > 50 * 1024 * 1024) { // 50MB
-                showToast('El archivo es demasiado grande. Máximo 50MB.', 'error');
-                return;
-            }
-
             originalFile = file;
             const reader = new FileReader();
-            
             reader.onload = (e) => {
                 currentImage = new Image();
                 currentImage.onload = () => {
-                    displayOriginalInfo();
-                    showControls();
-                    setDefaultDimensions();
-                    suggestOptimalSettings();
-                    showToast('¡Imagen cargada! Lista para transformar.', 'success');
+                    widthInput.value = currentImage.width;
+                    heightInput.value = currentImage.height;
+                    controls.style.display = 'block';
+                    results.style.display = 'none';
                 };
                 currentImage.src = e.target.result;
             };
-            
             reader.readAsDataURL(file);
         }
 
-        // --- LÓGICA DE LA INTERFAZ (UI) ---
-        function showControls() {
-            document.getElementById('controls').style.display = 'block';
-            document.getElementById('originalPreview').src = currentImage.src;
-            document.getElementById('results').style.display = 'none';
-        }
-
-        function switchPlatform(platform) {
-            currentPlatform = platform;
-            document.querySelectorAll('.platform-tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelector(`[data-platform="${platform}"]`).classList.add('active');
-            loadPresets(platform);
-            trackEvent('switch_platform', platform);
-        }
-
+        // --- LÓGICA DE LA INTERFAZ ---
         function loadPresets(platform) {
-            const presetsGrid = document.getElementById('presetsGrid');
+            presetsGrid.innerHTML = '';
             const presets = platformPresets[platform] || [];
-            presetsGrid.innerHTML = presets.map(p => `
-                <div class="preset-card" onclick="applyPreset(${p.width}, ${p.height}, '${p.name}')">
-                    <div class="preset-header">
-                        <div class="preset-name">${p.name}</div>
-                        <div class="preset-icon">${p.icon}</div>
-                    </div>
-                    <div class="preset-dimensions">${p.width} × ${p.height} px</div>
-                    <div class="preset-description">${p.description}</div>
-                </div>
-            `).join('');
+            presets.forEach(p => {
+                const presetEl = document.createElement('div');
+                presetEl.className = 'preset-card';
+                presetEl.innerHTML = `<strong>${p.icon} ${p.name}</strong><br><small>${p.width} × ${p.height} px</small>`;
+                presetEl.onclick = () => applyPreset(p.width, p.height);
+                presetsGrid.appendChild(presetEl);
+            });
         }
         
-        function applyPreset(width, height, name) {
-            if (!currentImage) {
-                 showToast('Carga una imagen antes de aplicar un preset', 'error');
-                 return;
-            }
-            const widthInput = document.getElementById('width');
-            const heightInput = document.getElementById('height');
+        function applyPreset(width, height) {
             widthInput.value = width;
             heightInput.value = height;
-            
-            if (document.getElementById('keepAspect').checked) {
-                adjustForAspectRatio(width, height);
-            }
-            
-            showToast(`Preset "${name}" aplicado`, 'success');
-            trackEvent('apply_preset', name);
         }
+
+        platformTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                platformTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                loadPresets(tab.dataset.platform);
+            });
+        });
+
+        // --- LÓGICA DE REDIMENSIONAMIENTO ---
+        widthInput.addEventListener('input', () => {
+            if (keepAspectCheckbox.checked && currentImage) {
+                const aspectRatio = currentImage.height / currentImage.width;
+                heightInput.value = Math.round(widthInput.value * aspectRatio);
+            }
+        });
         
-        function adjustForAspectRatio(targetWidth, targetHeight) {
-            if (!currentImage) return;
-            
-            const imageRatio = currentImage.width / currentImage.height;
-            const targetRatio = targetWidth / targetHeight;
-
-            if (imageRatio > targetRatio) {
-                // La imagen original es más ancha que el objetivo
-                document.getElementById('height').value = Math.round(targetWidth / imageRatio);
-            } else {
-                 // La imagen original es más alta o igual que el objetivo
-                document.getElementById('width').value = Math.round(targetHeight * imageRatio);
+        heightInput.addEventListener('input', () => {
+            if (keepAspectCheckbox.checked && currentImage) {
+                const aspectRatio = currentImage.width / currentImage.height;
+                widthInput.value = Math.round(heightInput.value * aspectRatio);
             }
-        }
-
-        function handleWidthChange(e) {
-            if (document.getElementById('keepAspect').checked && currentImage) {
-                const width = parseInt(e.target.value);
-                if (!isNaN(width) && width > 0) {
-                    const height = Math.round(width / (currentImage.width / currentImage.height));
-                    document.getElementById('height').value = height;
-                }
-            }
-        }
-
-        function handleHeightChange(e) {
-            if (document.getElementById('keepAspect').checked && currentImage) {
-                const height = parseInt(e.target.value);
-                if (!isNaN(height) && height > 0) {
-                    const width = Math.round(height * (currentImage.width / currentImage.height));
-                    document.getElementById('width').value = width;
-                }
-            }
-        }
-
-        function updateQualityDisplay() {
-            const quality = document.getElementById('quality').value;
-            document.getElementById('qualityValue').textContent = `${quality}%`;
-        }
-
-        // --- PROCESAMIENTO DE IMAGEN ---
-        function processImage() {
+        });
+        
+        processBtn.addEventListener('click', () => {
             if (!currentImage) {
-                showToast('Por favor, selecciona una imagen primero', 'error');
+                alert('Por favor, carga una imagen primero.');
                 return;
             }
 
-            processingStartTime = performance.now();
-            
-            const width = parseInt(document.getElementById('width').value);
-            const height = parseInt(document.getElementById('height').value);
-            const quality = parseInt(document.getElementById('quality').value) / 100;
-            const format = document.getElementById('format').value;
-            const smartResize = document.getElementById('smartResize').checked;
+            const width = parseInt(widthInput.value);
+            const height = parseInt(heightInput.value);
 
             if (isNaN(width) || isNaN(height) || width <= 0 || height <= 0) {
-                showToast('Por favor, ingresa dimensiones válidas', 'error');
+                alert('Por favor, introduce un ancho y alto válidos.');
                 return;
             }
 
-            showProgress();
-            
-            // Usar un worker para no bloquear el hilo principal (simulado con setTimeout aquí)
+            setLoading(true);
+
+            // Simular un pequeño retraso para que la UI se actualice
             setTimeout(() => {
                 const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
                 canvas.width = width;
                 canvas.height = height;
-
-                if (smartResize) {
-                    ctx.imageSmoothingEnabled = true;
-                    ctx.imageSmoothingQuality = 'high';
-                }
-
+                const ctx = canvas.getContext('2d');
                 ctx.drawImage(currentImage, 0, 0, width, height);
-                
-                let outputFormat = format === 'original' ? originalFile.type : `image/${format}`;
-                if (format === 'jpeg') outputFormat = 'image/jpeg';
-                
-                let fileExtension = format === 'original' ? originalFile.name.split('.').pop() : format;
-                if (fileExtension === 'jpeg') fileExtension = 'jpg';
-                
-                const processedDataUrl = canvas.toDataURL(outputFormat, quality);
-                
-                showResults(processedDataUrl, width, height, outputFormat, fileExtension);
-                hideProgress();
-                updateStats(originalFile.size, processedDataUrl);
-                measurePerformance('Image Processing', processingStartTime);
 
-            }, 500); // Simular un pequeño retraso
-        }
-        
-        function showProgress() {
-            const btn = document.getElementById('processBtn');
-            const progressBar = document.getElementById('progressBar');
-            const progressFill = document.getElementById('progressFill');
-            
-            btn.innerHTML = '<span class="loading"></span> Procesando...';
-            btn.disabled = true;
-            btn.classList.add('processing');
-            progressBar.style.display = 'block';
-            progressFill.style.width = '0%';
-            
-            // Simular progreso
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 25;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                }
-                progressFill.style.width = progress + '%';
+                const processedDataUrl = canvas.toDataURL(originalFile.type, 0.95);
+                
+                showResults(processedDataUrl, width, height);
+                setLoading(false);
             }, 100);
-        }
+        });
 
-        function hideProgress() {
-            const btn = document.getElementById('processBtn');
-            const progressBar = document.getElementById('progressBar');
-            
-            btn.innerHTML = '<span id="btnText">🚀 Crear Imagen Perfecta</span>';
-            btn.disabled = false;
-            btn.classList.remove('processing');
-            progressBar.style.display = 'none';
+        function setLoading(isLoading) {
+            if (isLoading) {
+                processBtn.disabled = true;
+                btnText.innerHTML = '<span class="loading"></span> Procesando...';
+            } else {
+                processBtn.disabled = false;
+                btnText.textContent = 'Redimensionar Imagen';
+            }
         }
+        
+        function showResults(processedDataUrl, width, height) {
+            // Mostrar vistas previas
+            originalPreview.src = currentImage.src;
+            processedPreview.src = processedDataUrl;
 
-        // --- RESULTADOS Y ESTADÍSTICAS ---
-        function displayOriginalInfo() {
-            const infoContainer = document.getElementById('imageInfo');
-            const sizeMB = (originalFile.size / 1024 / 1024).toFixed(2);
-            const aspectRatio = (currentImage.width / currentImage.height).toFixed(2);
-            infoContainer.innerHTML = `
-                <div class="info-row"><span class="info-label">📁 Nombre:</span> <span class="info-value">${originalFile.name}</span></div>
-                <div class="info-row"><span class="info-label">📏 Dimensiones:</span> <span class="info-value">${currentImage.width} × ${currentImage.height} px</span></div>
-                <div class="info-row"><span class="info-label">📊 Ratio:</span> <span class="info-value">${aspectRatio}:1</span></div>
-                <div class="info-row"><span class="info-label">💾 Tamaño:</span> <span class="info-value">${sizeMB} MB</span></div>
-                <div class="info-row"><span class="info-label">🔧 Formato:</span> <span class="info-value">${originalFile.type.split('/')[1].toUpperCase()}</span></div>
-            `;
-        }
-
-        function setDefaultDimensions() {
-             document.getElementById('width').value = currentImage.width;
-             document.getElementById('height').value = currentImage.height;
-        }
-
-        function showResults(dataUrl, width, height, format, extension) {
-            const results = document.getElementById('results');
-            document.getElementById('processedPreview').src = dataUrl;
-            
-            // Info Original
+            // Mostrar información de la imagen original
             const originalSizeKB = (originalFile.size / 1024).toFixed(1);
-            document.getElementById('originalInfo').innerHTML = `
-                <div class="info-row"><span class="info-label">Dimensiones:</span> <span class="info-value">${currentImage.width}×${currentImage.height}px</span></div>
-                <div class="info-row"><span class="info-label">Tamaño:</span> <span class="info-value">${originalSizeKB} KB</span></div>
-            `;
+            originalInfo.innerHTML = `<p><strong>Dimensiones:</strong> ${currentImage.width}×${currentImage.height}px</p><p><strong>Tamaño:</strong> ${originalSizeKB} KB</p>`;
             
-            // Info Procesada
-            const processedSizeBytes = atob(dataUrl.split(',')[1]).length;
+            // Mostrar información de la imagen procesada
+            const processedSizeBytes = atob(processedDataUrl.split(',')[1]).length;
             const processedSizeKB = (processedSizeBytes / 1024).toFixed(1);
-            const reduction = Math.max(0, Math.round(100 - (processedSizeBytes / originalFile.size) * 100));
-            document.getElementById('processedInfo').innerHTML = `
-                <div class="info-row"><span class="info-label">Dimensiones:</span> <span class="info-value">${width}×${height}px</span></div>
-                <div class="info-row"><span class="info-label">Tamaño:</span> <span class="info-value" style="color: #4facfe;">${processedSizeKB} KB</span></div>
-                <div class="info-row"><span class="info-label">Reducción:</span> <span class="info-value" style="color: #00f2fe;">${reduction}%</span></div>
-            `;
+            const reduction = Math.round(100 - (processedSizeBytes / originalFile.size) * 100);
+            processedInfo.innerHTML = `<p><strong>Dimensiones:</strong> ${width}×${height}px</p><p><strong>Tamaño:</strong> ${processedSizeKB} KB</p><p><strong>Ahorro:</strong> ${reduction}%</p>`;
 
-            // Botón de descarga
-            const downloadBtn = document.getElementById('downloadBtn');
-            downloadBtn.onclick = () => {
-                const link = document.createElement('a');
-                link.href = dataUrl;
-                const originalName = originalFile.name.substring(0, originalFile.name.lastIndexOf('.'));
-                link.download = `${originalName}_${width}x${height}.${extension}`;
-                link.click();
-                showToast('¡Descarga iniciada!', 'success');
-                trackEvent('download', `${currentPlatform}_${width}x${height}`);
-            };
+            // Configurar botón de descarga
+            const extension = originalFile.name.split('.').pop();
+            downloadBtn.href = processedDataUrl;
+            downloadBtn.download = `redimensionado_${width}x${height}.${extension}`;
 
+            // Mostrar sección de resultados
             results.style.display = 'block';
-            results.scrollIntoView({ behavior: 'smooth' });
-        }
 
-        function safeLocalStorage(action, key, value = null) {
-            try {
-                if (action === 'get') return localStorage.getItem(key);
-                else if (action === 'set') localStorage.setItem(key, value);
-            } catch (e) {
-                console.warn('localStorage no está disponible.');
-                return null;
-            }
-        }
-        
-        function updateStats(originalSize, processedDataUrl) {
+            // Actualizar estadísticas
             processedCount++;
-            const processedSize = atob(processedDataUrl.split(',')[1]).length;
-            const saved = Math.max(0, originalSize - processedSize);
-            totalSpaceSaved += saved;
-            
-            document.getElementById('imagesProcessed').textContent = processedCount;
-            document.getElementById('spaceSaved').textContent = `${(totalSpaceSaved / 1024 / 1024).toFixed(1)}MB`;
-            
-            safeLocalStorage('set', 'socialresize_stats', JSON.stringify({ processed: processedCount, saved: totalSpaceSaved }));
+            imagesProcessedSpan.textContent = processedCount;
         }
 
-        function loadStats() {
-            const stats = safeLocalStorage('get', 'socialresize_stats');
-            if (stats) {
-                const { processed = 0, saved = 0 } = JSON.parse(stats);
-                processedCount = processed;
-                totalSpaceSaved = saved;
-                document.getElementById('imagesProcessed').textContent = processedCount;
-                document.getElementById('spaceSaved').textContent = `${(totalSpaceSaved / 1024 / 1024).toFixed(1)}MB`;
-            }
-        }
-
-        // --- FUNCIONES ADICIONALES ---
-        function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.getElementById('theme-icon');
-            const currentTheme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            body.setAttribute('data-theme', currentTheme);
-            themeIcon.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
-            showToast(`Tema ${currentTheme === 'dark' ? 'oscuro' : 'claro'} activado`, 'success');
-            saveSettings();
-        }
-
-        function toggleBatchMode() {
-            batchMode = !batchMode;
-            showToast('El modo por lotes estará disponible próximamente.', 'success');
-        }
-
-        function showToast(message, type = 'success') {
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span> ${message}`;
-            document.body.appendChild(toast);
-            
-            setTimeout(() => toast.classList.add('show'), 10);
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => document.body.removeChild(toast), 300);
-            }, 3000);
-        }
-
-        function trackEvent(action, label) {
-            console.log(`EVENTO: ${action} - ${label}`);
-        }
-        
-        function saveSettings() {
-             const settings = {
-                quality: document.getElementById('quality').value,
-                format: document.getElementById('format').value,
-                keepAspect: document.getElementById('keepAspect').checked,
-                smartResize: document.getElementById('smartResize').checked,
-                autoOptimize: document.getElementById('autoOptimize').checked,
-                theme: document.body.getAttribute('data-theme')
-            };
-            safeLocalStorage('set', 'socialresize_settings', JSON.stringify(settings));
-        }
-
-        function loadSettings() {
-            const settingsJson = safeLocalStorage('get', 'socialresize_settings');
-            if (!settingsJson) return;
-            try {
-                const settings = JSON.parse(settingsJson);
-                document.getElementById('quality').value = settings.quality || 85;
-                document.getElementById('format').value = settings.format || 'original';
-                document.getElementById('keepAspect').checked = settings.keepAspect !== false;
-                document.getElementById('smartResize').checked = settings.smartResize === true;
-                document.getElementById('autoOptimize').checked = settings.autoOptimize === true;
-                if (settings.theme) {
-                    document.body.setAttribute('data-theme', settings.theme);
-                    document.getElementById('theme-icon').textContent = settings.theme === 'dark' ? '🌙' : '☀️';
-                }
-                updateQualityDisplay();
-            } catch (e) {
-                console.error("Error al cargar la configuración:", e);
-            }
-        }
-        
-        function suggestOptimalSettings() {
-             if (!currentImage || !document.getElementById('autoOptimize').checked) return;
-             
-             // Sugerencia simple basada en transparencia
-             const canvas = document.createElement('canvas');
-             const ctx = canvas.getContext('2d');
-             canvas.width = 1;
-             canvas.height = 1;
-             ctx.drawImage(currentImage, 0, 0, 1, 1);
-             const hasTransparency = ctx.getImageData(0, 0, 1, 1).data[3] < 255;
-
-             if (hasTransparency) {
-                 document.getElementById('format').value = 'png';
-                 showToast('Sugerencia: PNG recomendado por transparencia', 'success');
-             } else {
-                 document.getElementById('format').value = 'webp';
-                 showToast('Sugerencia: WebP recomendado para mejor compresión', 'success');
-             }
-        }
-        
-        function measurePerformance(operation, startTime) {
-            const duration = performance.now() - startTime;
-            console.log(`${operation} tardó ${duration.toFixed(2)} ms.`);
-        }
-    </script>
-
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#667eea">
-    <link rel="apple-touch-icon" href="/icon-192x192.png">
-    
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "SocialResize Pro",
-        "description": "Herramienta definitiva para crear contenido visual perfecto para YouTube, Instagram, TikTok, LinkedIn y más. Con presets profesionales y optimización inteligente.",
-        "url": "https://socialresize.pro",
-        "applicationCategory": "PhotographyApplication",
-        "operatingSystem": "Web Browser",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "featureList": [
-            "Presets para 50+ plataformas sociales",
-            "Redimensionamiento inteligente con IA",
-            "Múltiples formatos de salida optimizados",
-            "Compresión automática sin pérdida de calidad",
-            "Interfaz moderna para creadores de contenido",
-            "Procesamiento local y completamente privado"
-        ],
-        "screenshot": "https://socialresize.pro/screenshot.jpg",
-        "author": {
-            "@type": "Organization",
-            "name": "SocialResize Pro"
-        }
-    }
+        // --- INICIALIZACIÓN ---
+        loadPresets('youtube'); // Cargar presets iniciales
+    });
     </script>
 </body>
 </html>
