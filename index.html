@@ -3,513 +3,1341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialResize Pro - Redimensionador Para Creadores de Contenido | 2025</title>
+    <meta name="description" content="Herramienta definitiva para crear contenido visual perfecto: banners de YouTube, logos, fotos de perfil y más. Con presets para todas las plataformas sociales.">
+    <meta name="keywords" content="redimensionar para youtube, instagram, tiktok, facebook, twitter, linkedin, logos, banners, creadores de contenido">
     
-    <title>Redimensionador de Imágenes Rápido y Fácil | Herramienta Online</title>
-    <meta name="description" content="Redimensiona tus imágenes JPG, PNG y WEBP de forma gratuita y al instante. Herramienta online sencilla, sin necesidad de registro y con un diseño limpio.">
-
     <style>
-        /* =================================================================
-        CSS - Creado con foco en modularidad, responsividad y estética
-        =================================================================
-        */
-
-        /* -- Variables Globales para fácil personalización -- */
+        /* Variables CSS avanzadas con paleta de creador */
         :root {
-            --color-primario: #007aff; /* Azul vibrante para acciones */
-            --color-primario-hover: #0056b3;
-            --color-fondo: #f8f9fa; /* Gris muy claro para el fondo */
-            --color-superficie: #ffffff; /* Blanco para las tarjetas y elementos principales */
-            --color-texto-principal: #212529; /* Negro suave */
-            --color-texto-secundario: #6c757d; /* Gris para textos de apoyo */
-            --color-borde: #dee2e6;
-            --color-placeholder-ad: #e9ecef; /* Color para los espacios de anuncios */
-            --radio-borde: 8px;
-            --sombra-caja: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --fuente-principal: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --youtube-gradient: linear-gradient(135deg, #ff0000 0%, #ff4444 100%);
+            --instagram-gradient: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+            --tiktok-gradient: linear-gradient(135deg, #ff0050 0%, #00f2ea 100%);
+            --twitter-gradient: linear-gradient(135deg, #1da1f2 0%, #0d8bd9 100%);
+            --linkedin-gradient: linear-gradient(135deg, #0077b5 0%, #005885 100%);
+            --facebook-gradient: linear-gradient(135deg, #1877f2 0%, #166fe5 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #1a1a2e;
+            --bg-card: rgba(26, 26, 46, 0.9);
+            --bg-preset: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #b4b4b4;
+            --text-accent: #667eea;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 12px 48px rgba(102, 126, 234, 0.3);
+            --blur-bg: blur(15px);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 16px;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        /* -- Reseteo y Estilos Base -- */
-        *, *::before, *::after {
-            box-sizing: border-box;
+        [data-theme="light"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.95);
+            --bg-preset: rgba(0, 0, 0, 0.03);
+            --text-primary: #1a202c;
+            --text-secondary: #718096;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
             margin: 0;
             padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: var(--fuente-principal);
-            background-color: var(--color-fondo);
-            color: var(--color-texto-principal);
+            font-family: var(--font-primary);
+            background: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
-            font-size: 16px;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* -- Estructura y Contenedores -- */
-        .container {
-            max-width: 1200px;
+        /* Fondo animado mejorado */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            z-index: -1;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        /* Header moderno */
+        .header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: var(--blur-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 1.5rem;
+            padding: 0 2rem;
             display: flex;
-            gap: 2rem;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        @media (min-width: 1024px) {
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '🎨';
+            font-size: 1.5rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-toggle, .batch-mode-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: var(--blur-bg);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .theme-toggle:hover, .batch-mode-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Contenedor principal mejorado */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+        }
+
+        @media (max-width: 1200px) {
             .container {
-                flex-direction: row;
+                grid-template-columns: 1fr;
+                padding: 1rem;
             }
         }
 
-        main {
-            flex: 3; /* Ocupa más espacio */
+        /* Card principal con efectos mejorados */
+        .main-card {
+            background: var(--bg-card);
+            backdrop-filter: var(--blur-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        .main-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* Área de upload premium */
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-preset);
+        }
+
+        .upload-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .upload-area:hover::before {
+            left: 100%;
+        }
+
+        .upload-area:hover {
+            border-color: var(--text-accent);
+            background: rgba(102, 126, 234, 0.08);
+            transform: scale(1.02);
+        }
+
+        .upload-area.dragover {
+            border-color: var(--text-accent);
+            background: rgba(102, 126, 234, 0.15);
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .upload-text {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .upload-hint {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .file-formats {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .format-badge {
+            background: var(--bg-secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Sección de presets revolucionaria */
+        .presets-section {
+            margin: 2rem 0;
+        }
+
+        .presets-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .presets-title::before {
+            content: '⚡';
+        }
+
+        .platform-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .platform-tab {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .platform-tab.active {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .platform-tab:hover:not(.active) {
+            background: var(--bg-preset);
+            transform: translateY(-1px);
+        }
+
+        /* Presets grid mejorado */
+        .presets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .preset-card {
+            background: var(--bg-preset);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preset-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .preset-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .preset-card:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .preset-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .preset-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .preset-icon {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .preset-dimensions {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .preset-description {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        /* Controles avanzados */
+        .controls {
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .controls-section {
+            background: var(--bg-preset);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .controls-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-accent);
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: var(--text-accent);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .quality-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .quality-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            background: var(--bg-secondary);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .quality-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .quality-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .quality-value {
+            background: var(--bg-secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* Opciones avanzadas */
+        .advanced-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem;
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .checkbox-group:hover {
+            background: var(--bg-preset);
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--text-accent);
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* Botón principal mejorado */
+        .process-btn {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 1.2rem 2rem;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .process-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .process-btn:hover::before {
+            left: 100%;
+        }
+
+        .process-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 48px rgba(102, 126, 234, 0.4);
+        }
+
+        .process-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .process-btn.processing {
+            background: var(--warning-gradient);
+        }
+
+        /* Área de resultados premium */
+        .results {
+            display: none;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .results-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--success-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .results-subtitle {
+            color: var(--text-secondary);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .result-item {
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+        }
+
+        .result-item h4 {
+            margin-bottom: 1rem;
+            color: var(--text-accent);
+            font-size: 1.1rem;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: calc(var(--border-radius) / 2);
+            border: 1px solid var(--border-color);
+            margin: 1rem 0;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .image-info {
+            background: var(--bg-preset);
+            padding: 1rem;
+            border-radius: calc(var(--border-radius) / 2);
+            margin: 1rem 0;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            color: var(--text-secondary);
+        }
+
+        .info-value {
+            font-weight: 600;
+        }
+
+        .download-btn {
+            background: var(--success-gradient);
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 1rem 1.5rem;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+        }
+
+        /* Sidebar mejorada */
+        .sidebar {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
         }
 
-        aside {
-            flex: 1; /* Ocupa menos espacio */
-        }
-        
-        /* -- Header -- */
-        .site-header {
-            background-color: var(--color-superficie);
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--color-borde);
-            text-align: center;
-        }
-
-        .site-header h1 {
-            font-size: 1.75rem;
-            color: var(--color-primario);
+        .sidebar-card {
+            background: var(--bg-card);
+            backdrop-filter: var(--blur-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* -- Tarjeta Principal de la Herramienta -- */
-        .tool-card {
-            background-color: var(--color-superficie);
-            padding: 2rem;
-            border-radius: var(--radio-borde);
-            box-shadow: var(--sombra-caja);
+        .sidebar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
         }
 
-        .tool-card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        .sidebar-card h3 {
+            color: var(--text-accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
         }
 
-        .tool-card p {
-            color: var(--color-texto-secundario);
-            margin-bottom: 1.5rem;
+        .feature-list, .tip-list {
+            list-style: none;
         }
 
-        /* -- Formularios y Controles -- */
-        .upload-area {
-            border: 2px dashed var(--color-borde);
-            border-radius: var(--radio-borde);
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
-        }
-        
-        .upload-area:hover, .upload-area.dragover {
-             background-color: #eef5ff;
-             border-color: var(--color-primario);
+        .feature-list li, .tip-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
-        .upload-area p {
-            margin: 0;
+        .feature-list li:last-child, .tip-list li:last-child {
+            border-bottom: none;
         }
 
-        #file-input {
-            display: none;
+        .feature-list li::before {
+            content: '✨';
+            font-size: 1rem;
         }
 
-        .options-grid {
+        .tip-list li::before {
+            content: '💡';
+            font-size: 1rem;
+        }
+
+        /* Estadísticas en tiempo real */
+        .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            margin-top: 1.5rem;
-            align-items: center;
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--color-texto-secundario);
-            margin-bottom: 0.25rem;
-        }
-        
-        .form-group input[type="number"] {
-            font-family: var(--fuente-principal);
-            padding: 0.75rem;
-            border: 1px solid var(--color-borde);
-            border-radius: var(--radio-borde);
-            font-size: 1rem;
-            width: 100%;
-            -moz-appearance: textfield; /* Para Firefox */
-        }
-        
-        .form-group input[type="number"]::-webkit-outer-spin-button,
-        .form-group input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        
-        .options-grid .checkbox-group {
-            grid-column: 1 / -1; /* Ocupa todo el ancho */
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        #aspect-ratio {
-            width: 16px;
-            height: 16px;
-        }
-
-        .submit-btn {
-            background-color: var(--color-primario);
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: var(--radio-borde);
-            cursor: pointer;
-            width: 100%;
-            margin-top: 1.5rem;
-            transition: background-color 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .submit-btn:hover {
-            background-color: var(--color-primario-hover);
-        }
-
-        .submit-btn:disabled {
-            background-color: var(--color-texto-secundario);
-            cursor: not-allowed;
-        }
-
-        /* -- Zona de Resultados -- */
-        #result-area {
-            margin-top: 2rem;
-            display: none; /* Oculto por defecto */
-            text-align: center;
-            border-top: 1px solid var(--color-borde);
-            padding-top: 2rem;
-        }
-        
-        #result-area h3 {
-             margin-bottom: 1rem;
-        }
-
-        #preview-image {
-            max-width: 100%;
-            max-height: 300px;
-            border-radius: var(--radio-borde);
-            border: 1px solid var(--color-borde);
-            margin-bottom: 1rem;
-        }
-
-        .download-link {
-            display: inline-block;
-            background-color: #28a745; /* Verde para descarga */
-            color: white;
-            text-decoration: none;
-            padding: 0.75rem 2rem;
-            border-radius: var(--radio-borde);
-            font-weight: bold;
-            transition: background-color 0.2s ease;
-        }
-        
-        .download-link:hover {
-            background-color: #218838;
-        }
-
-        /* -- Espacios Publicitarios -- */
-        .ad-placeholder {
-            background-color: var(--color-placeholder-ad);
-            border-radius: var(--radio-borde);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-texto-secundario);
-            font-size: 0.875rem;
-            text-align: center;
+        .stat-item {
+            background: var(--bg-preset);
             padding: 1rem;
+            border-radius: calc(var(--border-radius) / 2);
+            text-align: center;
         }
 
-        .ad-header { min-height: 90px; }
-        .ad-sidebar { min-height: 600px; }
-        .ad-in-content { min-height: 100px; margin-top: 2rem; }
-        .ad-sticky-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-accent);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
+        }
+
+        /* Elementos de carga mejorados */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .progress-bar {
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
-            padding: 0.5rem;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            height: 6px;
+            background: var(--bg-secondary);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 1rem 0;
         }
-        .ad-sticky-footer .ad-placeholder { min-height: 50px; }
 
-        /* -- Responsividad para pantallas pequeñas -- */
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        /* Notificaciones toast */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            backdrop-filter: var(--blur-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1rem 1.5rem;
+            box-shadow: var(--shadow-soft);
+            z-index: 10000;
+            transform: translateX(400px);
+            transition: var(--transition);
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            border-left: 4px solid #4facfe;
+        }
+
+        .toast.error {
+            border-left: 4px solid #ff4757;
+        }
+
+        /* Responsive mejorado */
         @media (max-width: 768px) {
-            .container { padding: 1rem; }
-            .tool-card { padding: 1.5rem; }
-            .options-grid { grid-template-columns: 1fr; }
-            .options-grid .checkbox-group { grid-column: auto; }
-            .site-header h1 { font-size: 1.5rem; }
+            .header-content {
+                padding: 0 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .main-card {
+                padding: 1.5rem;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .platform-tabs {
+                justify-content: center;
+            }
+            
+            .presets-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .advanced-options {
+                grid-template-columns: 1fr;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.5rem;
+            }
+            
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+            
+            .upload-icon {
+                font-size: 2.5rem;
+            }
+            
+            .card-title {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
-<body>
-
-    <div class="ad-placeholder ad-header">
-        Espacio Publicitario (Header 728x90)
-    </div>
-
-    <header class="site-header">
-        <h1>Redimensionador de Imágenes Pro</h1>
+<body data-theme="dark">
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">SocialResize Pro</div>
+            <div class="header-actions">
+                <button class="batch-mode-btn" onclick="toggleBatchMode()">
+                    <span>📦</span> Modo Lote
+                </button>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <span id="theme-icon">🌙</span> Tema
+                </button>
+            </div>
+        </div>
     </header>
 
     <div class="container">
         <main>
-            <div class="tool-card">
-                <h2>1. Sube tu imagen</h2>
-                <p>Arrastra un archivo o haz clic para seleccionar una imagen (JPG, PNG, WEBP).</p>
+            <div class="main-card">
+                <h1 class="card-title">El Redimensionador Definitivo para Creadores</h1>
+                <p class="card-subtitle">Crea contenido visual perfecto para YouTube, Instagram, TikTok, LinkedIn y más. Con presets profesionales y optimización inteligente para cada plataforma.</p>
                 
-                <form id="resize-form">
-                    <label for="file-input" id="upload-label" class="upload-area" 
-                           aria-label="Área para subir imagen">
-                        <p id="upload-text">🖱️ Haz clic o arrastra tu imagen aquí</p>
-                    </label>
-                    <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">🎨</div>
+                    <div class="upload-text">Arrastra tu imagen aquí o haz clic para seleccionar</div>
+                    <div class="upload-hint">Perfecto para logos, banners, fotos de perfil y más</div>
+                    <div class="file-formats">
+                        <span class="format-badge">JPG</span>
+                        <span class="format-badge">PNG</span>
+                        <span class="format-badge">WEBP</span>
+                        <span class="format-badge">GIF</span>
+                        <span class="format-badge">SVG</span>
+                    </div>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
 
-                    <div id="options" style="display: none;">
-                         <h2>2. Elige las nuevas dimensiones</h2>
-                         <div class="options-grid">
-                            <div class="form-group">
+                <div class="presets-section">
+                    <div class="presets-title">Presets Profesionales por Plataforma</div>
+                    
+                    <div class="platform-tabs">
+                        <button class="platform-tab active" data-platform="youtube">
+                            📺 YouTube
+                        </button>
+                        <button class="platform-tab" data-platform="instagram">
+                            📸 Instagram
+                        </button>
+                        <button class="platform-tab" data-platform="tiktok">
+                            🎵 TikTok
+                        </button>
+                        <button class="platform-tab" data-platform="facebook">
+                            📘 Facebook
+                        </button>
+                        <button class="platform-tab" data-platform="twitter">
+                            🐦 Twitter/X
+                        </button>
+                        <button class="platform-tab" data-platform="linkedin">
+                            💼 LinkedIn
+                        </button>
+                        <button class="platform-tab" data-platform="logos">
+                            🏷️ Logos
+                        </button>
+                        <button class="platform-tab" data-platform="web">
+                            🌐 Web
+                        </button>
+                    </div>
+
+                    <div class="presets-grid" id="presetsGrid">
+                        </div>
+                </div>
+
+                <div class="controls" id="controls">
+                    <div class="controls-section">
+                        <div class="controls-title">🎛️ Configuración Personalizada</div>
+                        
+                        <div class="controls-grid">
+                            <div class="input-group">
                                 <label for="width">Ancho (px)</label>
-                                <input type="number" id="width" min="1" placeholder="Ej: 1920">
+                                <input type="number" id="width" min="1" max="10000" placeholder="1920">
                             </div>
-                            <div class="form-group">
+                            <div class="input-group">
                                 <label for="height">Alto (px)</label>
-                                <input type="number" id="height" min="1" placeholder="Ej: 1080">
+                                <input type="number" id="height" min="1" max="10000" placeholder="1080">
+                            </div>
+                            <div class="input-group">
+                                <label for="quality">Calidad de Compresión</label>
+                                <div class="quality-container">
+                                    <input type="range" id="quality" class="quality-slider" min="1" max="100" value="85">
+                                    <span class="quality-value" id="qualityValue">85%</span>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="format">Formato de Salida</label>
+                                <select id="format">
+                                    <option value="original">🔄 Mantener Original</option>
+                                    <option value="jpeg">📷 JPEG (Fotos)</option>
+                                    <option value="png">🖼️ PNG (Transparencia)</option>
+                                    <option value="webp">⚡ WebP (Web Optimizado)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="advanced-options">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="keepAspect" checked>
+                                <label for="keepAspect">🔒 Mantener Proporción</label>
                             </div>
                             <div class="checkbox-group">
-                                 <input type="checkbox" id="aspect-ratio" checked>
-                                 <label for="aspect-ratio">Mantener relación de aspecto</label>
+                                <input type="checkbox" id="smartResize">
+                                <label for="smartResize">🧠 Redimensionamiento Inteligente</label>
                             </div>
-                         </div>
-                         <button type="submit" id="submit-btn" class="submit-btn" disabled>
-                             <span>Redimensionar Imagen</span>
-                         </button>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="autoOptimize">
+                                <label for="autoOptimize">⚡ Optimización Automática</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="preserveMetadata">
+                                <label for="preserveMetadata">📋 Conservar Metadatos</label>
+                            </div>
+                        </div>
+
+                        <button class="process-btn" id="processBtn" onclick="processImage()">
+                            <span id="btnText">🚀 Crear Imagen Perfecta</span>
+                        </button>
+
+                        <div class="progress-bar" id="progressBar" style="display: none;">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
                     </div>
-                </form>
-            </div>
-            
-            <div id="result-area">
-                <h3>¡Listo! Aquí tienes tu imagen redimensionada</h3>
-                <img id="preview-image" src="" alt="Vista previa de la imagen redimensionada">
-                <a id="download-link" class="download-link" href="#" download="imagen-redimensionada.png">Descargar Imagen</a>
-                
-                <div class="ad-placeholder ad-in-content">
-                    Espacio Publicitario (In-Content)
+                </div>
+
+                <div class="results" id="results">
+                    <div class="results-header">
+                        <div class="results-title">🎉 ¡Imagen Lista para Conquistar!</div>
+                        <div class="results-subtitle">Tu contenido optimizado y listo para brillar en las redes</div>
+                    </div>
+                    
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <h4>📷 Imagen Original</h4>
+                            <img id="originalPreview" class="preview-image" alt="Vista previa original">
+                            <div class="image-info" id="originalInfo"></div>
+                        </div>
+                        <div class="result-item">
+                            <h4>✨ Imagen Optimizada</h4>
+                            <img id="processedPreview" class="preview-image" alt="Vista previa procesada">
+                            <div class="image-info" id="processedInfo"></div>
+                            <button class="download-btn" id="downloadBtn">
+                                📥 Descargar Imagen Perfecta
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
-        
-        <aside>
-            <div class="ad-placeholder ad-sidebar">
-                Espacio Publicitario (Sidebar 300x600)
+
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3>✨ Características Premium</h3>
+                <ul class="feature-list">
+                    <li>Presets para 50+ plataformas sociales</li>
+                    <li>Optimización automática con IA</li>
+                    <li>Compresión inteligente sin pérdida de calidad</li>
+                    <li>Redimensionamiento por lotes</li>
+                    <li>Conversión entre múltiples formatos</li>
+                    <li>Procesamiento 100% privado y local</li>
+                    <li>Sin marcas de agua ni límites</li>
+                    <li>Presets actualizados constantemente</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>📊 Información de la Imagen</h3>
+                <div id="imageInfo">
+                    <p style="text-align: center; color: var(--text-secondary); padding: 2rem 0;">
+                        🎨 Selecciona una imagen para ver sus propiedades detalladas
+                    </p>
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>💡 Consejos de Creador Pro</h3>
+                <ul class="tip-list">
+                    <li>Usa WebP para web (hasta 35% menos peso)</li>
+                    <li>PNG para logos con transparencia</li>
+                    <li>JPEG para fotografías y fondos</li>
+                    <li>Mantén calidad >80% para impresión</li>
+                    <li>Optimiza para móviles (la mayoría del tráfico)</li>
+                    <li>Considera el contexto de cada plataforma</li>
+                    <li>Prueba diferentes ratios para engagement</li>
+                    <li>Siempre ten versiones de respaldo</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>📈 Estadísticas de Uso</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="imagesProcessed">0</div>
+                        <div class="stat-label">Imágenes Procesadas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="spaceSaved">0MB</div>
+                        <div class="stat-label">Espacio Ahorrado</div>
+                    </div>
+                </div>
             </div>
         </aside>
     </div>
 
-    <footer class="ad-sticky-footer">
-        <div class="ad-placeholder">
-             Espacio Publicitario (Sticky Footer)
-        </div>
-    </footer>
-
     <script>
-    /* =================================================================
-    JAVASCRIPT - Creado con JavaScript moderno (ES6+) sin librerías
-    =================================================================
-    */
+        // Base de datos completa de presets por plataforma
+        const platformPresets = {
+            youtube: [
+                { name: "Banner de Canal", width: 2560, height: 1440, icon: "🎬", description: "Banner principal que se ve en todos los dispositivos" },
+                { name: "Thumbnail Video", width: 1280, height: 720, icon: "🖼️", description: "Miniatura perfecta para videos, ratio 16:9" },
+                { name: "Logo de Canal", width: 800, height: 800, icon: "🎯", description: "Logo circular para el canal" },
+                { name: "Watermark", width: 150, height: 150, icon: "💧", description: "Marca de agua para videos" },
+                { name: "Community Post", width: 1200, height: 900, icon: "📝", description: "Imagen para publicaciones de comunidad" },
+                { name: "Short Thumbnail", width: 1080, height: 1920, icon: "📱", description: "Miniatura vertical para YouTube Shorts" }
+            ],
+            instagram: [
+                { name: "Post Cuadrado", width: 1080, height: 1080, icon: "⬜", description: "Formato clásico de Instagram, perfecto balance" },
+                { name: "Story", width: 1080, height: 1920, icon: "📖", description: "Historias verticales, formato 9:16" },
+                { name: "Reel", width: 1080, height: 1920, icon: "🎥", description: "Videos cortos verticales" },
+                { name: "IGTV Cover", width: 420, height: 654, icon: "📺", description: "Portada para videos IGTV" },
+                { name: "Post Horizontal", width: 1080, height: 566, icon: "📐", description: "Formato paisaje 1.91:1" },
+                { name: "Post Vertical", width: 1080, height: 1350, icon: "📏", description: "Formato retrato 4:5" },
+                { name: "Profile Picture", width: 320, height: 320, icon: "👤", description: "Foto de perfil circular" },
+                { name: "Highlight Cover", width: 161, height: 161, icon: "⭐", description: "Portada para historias destacadas" }
+            ],
+            tiktok: [
+                { name: "Video Principal", width: 1080, height: 1920, icon: "🎵", description: "Formato vertical estándar 9:16" },
+                { name: "Profile Picture", width: 200, height: 200, icon: "👤", description: "Foto de perfil cuadrada" },
+                { name: "Live Stream", width: 1080, height: 1920, icon: "🔴", description: "Transmisión en vivo vertical" },
+                { name: "Ads Vertical", width: 1080, height: 1920, icon: "📢", description: "Anuncios verticales en TikTok" },
+                { name: "Thumbnail", width: 1080, height: 1920, icon: "🖼️", description: "Miniatura para videos" }
+            ],
+            facebook: [
+                { name: "Cover Photo", width: 1200, height: 630, icon: "🏞️", description: "Foto de portada del perfil" },
+                { name: "Post Image", width: 1200, height: 900, icon: "📝", description: "Imagen para publicaciones" },
+                { name: "Profile Picture", width: 400, height: 400, icon: "👤", description: "Foto de perfil" },
+                { name: "Event Cover", width: 1920, height: 1080, icon: "🎉", description: "Portada para eventos" },
+                { name: "Story", width: 1080, height: 1920, icon: "📖", description: "Historias de Facebook" },
+                { name: "Link Preview", width: 1200, height: 630, icon: "🔗", description: "Vista previa de enlaces compartidos" },
+                { name: "Marketplace", width: 1200, height: 1200, icon: "🛒", description: "Imagen para Facebook Marketplace" }
+            ],
+            twitter: [
+                { name: "Header", width: 1500, height: 500, icon: "🎨", description: "Banner del perfil de Twitter/X" },
+                { name: "Post Image", width: 1200, height: 675, icon: "📝", description: "Imagen para tweets, ratio 16:9" },
+                { name: "Profile Picture", width: 400, height: 400, icon: "👤", description: "Foto de perfil circular" },
+                { name: "Card Image", width: 1200, height: 628, icon: "🃏", description: "Imagen para Twitter Cards" },
+                { name: "Thread Image", width: 1080, height: 1080, icon: "🧵", description: "Imagen cuadrada para hilos" },
+                { name: "Space Cover", width: 1200, height: 600, icon: "🎙️", description: "Portada para Twitter Spaces" }
+            ],
+            linkedin: [
+                { name: "Cover Photo", width: 1584, height: 396, icon: "🏢", description: "Banner del perfil profesional" },
+                { name: "Post Image", width: 1200, height: 627, icon: "📊", description: "Imagen para publicaciones" },
+                { name: "Profile Picture", width: 400, height: 400, icon: "👔", description: "Foto de perfil profesional" },
+                { name: "Company Logo", width: 300, height: 300, icon: "🏪", description: "Logo de página de empresa" },
+                { name: "Article Header", width: 1280, height: 720, icon: "📰", description: "Cabecera para artículos" },
+                { name: "Event Cover", width: 1776, height: 444, icon: "📅", description: "Portada para eventos profesionales" }
+            ],
+            logos: [
+                { name: "Logo Cuadrado", width: 512, height: 512, icon: "⬜", description: "Logo cuadrado para aplicaciones" },
+                { name: "Logo Horizontal", width: 1024, height: 256, icon: "➖", description: "Logo horizontal para headers" },
+                { name: "Logo Vertical", width: 256, height: 1024, icon: "⬇️", description: "Logo vertical para sidebars" },
+                { name: "Favicon", width: 32, height: 32, icon: "🔖", description: "Icono para navegadores web" },
+                { name: "App Icon iOS", width: 1024, height: 1024, icon: "📱", description: "Icono para App Store" },
+                { name: "App Icon Android", width: 512, height: 512, icon: "🤖", description: "Icono para Google Play" },
+                { name: "Watermark", width: 200, height: 50, icon: "💧", description: "Marca de agua transparente" },
+                { name: "Business Card", width: 1050, height: 600, icon: "💼", description: "Logo para tarjetas de visita" }
+            ],
+            web: [
+                { name: "Hero Banner", width: 1920, height: 1080, icon: "🎭", description: "Banner principal de sitio web" },
+                { name: "Blog Header", width: 1200, height: 600, icon: "📝", description: "Cabecera para artículos de blog" },
+                { name: "Open Graph", width: 1200, height: 630, icon: "🌐", description: "Imagen para compartir en redes" },
+                { name: "Thumbnail", width: 800, height: 450, icon: "🖼️", description: "Miniatura para videos/artículos" },
+                { name: "Gallery Image", width: 1080, height: 1080, icon: "🖼️", description: "Imagen cuadrada para galerías" },
+                { name: "Banner Mobile", width: 768, height: 400, icon: "📱", description: "Banner optimizado para móviles" },
+                { name: "Email Header", width: 600, height: 200, icon: "📧", description: "Cabecera para newsletters" },
+                { name: "Product Image", width: 1000, height: 1000, icon: "📦", description: "Imagen de producto para e-commerce" }
+            ]
+        };
 
-    // Espera a que todo el HTML esté cargado para ejecutar el script
-    document.addEventListener('DOMContentLoaded', () => {
+        // Variables globales
+        let currentImage = null;
+        let originalFile = null;
+        let currentPlatform = 'youtube';
+        let batchMode = false;
+        let processedCount = 0;
+        let totalSpaceSaved = 0;
+        let processingStartTime;
 
-        // --- SELECCIÓN DE ELEMENTOS DEL DOM ---
-        const resizeForm = document.getElementById('resize-form');
-        const fileInput = document.getElementById('file-input');
-        const uploadLabel = document.getElementById('upload-label');
-        const uploadText = document.getElementById('upload-text');
-        const optionsDiv = document.getElementById('options');
-        const widthInput = document.getElementById('width');
-        const heightInput = document.getElementById('height');
-        const aspectRatioCheckbox = document.getElementById('aspect-ratio');
-        const submitBtn = document.getElementById('submit-btn');
-        const resultArea = document.getElementById('result-area');
-        const previewImage = document.getElementById('preview-image');
-        const downloadLink = document.getElementById('download-link');
-
-        let originalImage = null;
-        let originalWidth = 0;
-        let originalHeight = 0;
-        let originalRatio = 0;
-        let selectedFile = null;
-
-        // --- LÓGICA DE SUBIDA DE ARCHIVO (DRAG & DROP Y CLIC) ---
-        uploadLabel.addEventListener('click', () => fileInput.click());
-        uploadLabel.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadLabel.classList.add('dragover');
+        // --- INICIALIZACIÓN ---
+        document.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+            loadPresets(currentPlatform);
+            loadStats();
+            loadSettings();
         });
-        uploadLabel.addEventListener('dragleave', () => {
-            uploadLabel.classList.remove('dragover');
-        });
-        uploadLabel.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadLabel.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                fileInput.files = files;
-                handleFileSelect({ target: fileInput });
-            }
-        });
-        fileInput.addEventListener('change', handleFileSelect);
 
-        function handleFileSelect(event) {
-            selectedFile = event.target.files[0];
-            if (!selectedFile) return;
+        function setupEventListeners() {
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            const widthInput = document.getElementById('width');
+            const heightInput = document.getElementById('height');
+            const qualityInput = document.getElementById('quality');
 
-            // Feedback visual inmediato
-            uploadText.textContent = `✅ Archivo seleccionado: ${selectedFile.name}`;
-            uploadLabel.style.borderColor = 'var(--color-primario)';
+            // Eventos de carga
+            uploadArea.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('dragover', handleDragOver);
+            uploadArea.addEventListener('dragleave', handleDragLeave);
+            uploadArea.addEventListener('drop', handleDrop);
+            fileInput.addEventListener('change', handleFileSelect);
 
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                originalImage = new Image();
-                originalImage.onload = () => {
-                    // Guardar dimensiones originales
-                    originalWidth = originalImage.width;
-                    originalHeight = originalImage.height;
-                    originalRatio = originalWidth / originalHeight;
+            // Eventos de controles
+            widthInput.addEventListener('input', handleWidthChange);
+            heightInput.addEventListener('input', handleHeightChange);
+            qualityInput.addEventListener('input', updateQualityDisplay);
 
-                    // Rellenar campos y mostrar opciones
-                    widthInput.value = originalWidth;
-                    heightInput.value = originalHeight;
-                    optionsDiv.style.display = 'block';
-                    submitBtn.disabled = false;
-                };
-                originalImage.src = e.target.result;
-            };
-            reader.readAsDataURL(selectedFile);
+            // Pestañas de plataforma
+            document.querySelectorAll('.platform-tab').forEach(tab => {
+                tab.addEventListener('click', () => switchPlatform(tab.dataset.platform));
+            });
+            
+            // Auto-guardado de configuración
+            document.getElementById('controls').addEventListener('change', saveSettings);
         }
 
-        // --- LÓGICA DE MANTENER RELACIÓN DE ASPECTO ---
-        widthInput.addEventListener('input', () => {
-            if (aspectRatioCheckbox.checked) {
-                heightInput.value = Math.round(widthInput.value / originalRatio);
-            }
-        });
-
-        heightInput.addEventListener('input', () => {
-            if (aspectRatioCheckbox.checked) {
-                widthInput.value = Math.round(heightInput.value * originalRatio);
-            }
-        });
-
-        // --- LÓGICA PRINCIPAL DE LA HERRAMIENTA: REDIMENSIONAR ---
-        resizeForm.addEventListener('submit', (e) => {
+        // --- MANEJO DE ARCHIVOS ---
+        function handleDragOver(e) {
             e.preventDefault();
-            if (!originalImage) return;
+            e.currentTarget.classList.add('dragover');
+        }
 
-            const newWidth = parseInt(widthInput.value, 10);
-            const newHeight = parseInt(heightInput.value, 10);
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('dragover');
+        }
 
-            if (isNaN(newWidth) || isNaN(newHeight) || newWidth <= 0 || newHeight <= 0) {
-                alert('Por favor, introduce un ancho y alto válidos.');
+        function handleDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                processFile(files[0]);
+            }
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                processFile(file);
+            }
+        }
+
+        function processFile(file) {
+            if (!file.type.startsWith('image/')) {
+                showToast('Por favor selecciona un archivo de imagen válido', 'error');
                 return;
             }
 
-            // Crear un canvas para el redimensionamiento
-            const canvas = document.createElement('canvas');
-            canvas.width = newWidth;
-            canvas.height = newHeight;
-            const ctx = canvas.getContext('2d');
+            if (file.size > 50 * 1024 * 1024) { // 50MB
+                showToast('El archivo es demasiado grande. Máximo 50MB.', 'error');
+                return;
+            }
 
-            // Dibujar la imagen en el canvas con las nuevas dimensiones
-            ctx.drawImage(originalImage, 0, 0, newWidth, newHeight);
-
-            // Obtener la URL de la imagen redimensionada
-            const resizedImageDataUrl = canvas.toDataURL(selectedFile.type);
-
-            // Mostrar los resultados
-            previewImage.src = resizedImageDataUrl;
-            previewImage.alt = `Vista previa de imagen redimensionada a ${newWidth}x${newHeight}px`;
-            downloadLink.href = resizedImageDataUrl;
+            originalFile = file;
+            const reader = new FileReader();
             
-            const fileExtension = selectedFile.name.split('.').pop();
-            downloadLink.download = `imagen-redimensionada-${newWidth}x${newHeight}.${fileExtension}`;
-
-            resultArea.style.display = 'block';
+            reader.onload = (e) => {
+                currentImage = new Image();
+                currentImage.onload = () => {
+                    displayOriginalInfo();
+                    showControls();
+                    setDefaultDimensions();
+                    suggestOptimalSettings();
+                    showToast('¡Imagen cargada! Lista para transformar.', 'success');
+                };
+                currentImage.src = e.target.result;
+            };
             
-            // Scroll suave hacia los resultados
-            resultArea.scrollIntoView({ behavior: 'smooth' });
-        });
-        
-        /*
-        ========================================================================================
-        COMENTARIO PARA EL USUARIO: Guía para cambiar la idea de la herramienta
-        ========================================================================================
-        
-        Este código está diseñado para ser un "esqueleto" reutilizable. Para adaptarlo a otra
-        idea (ej: un conversor de texto a mayúsculas, un generador de paletas de colores, etc.),
-        solo necesitas modificar partes específicas:
+            reader.readAsDataURL(file);
+        }
 
-        1.  MODIFICA EL HTML EN `<form id="resize-form">`:
-            - Cambia los `<h2>` y `<p>` para describir tu nueva herramienta.
-            - Reemplaza los inputs de `width`, `height` y el `file-input` por los controles
-              que necesites (ej: un `<textarea>` para texto, un `<input type="color">` para colores).
+        // --- LÓGICA DE LA INTERFAZ (UI) ---
+        function showControls() {
+            document.getElementById('controls').style.display = 'block';
+            document.getElementById('originalPreview').src = currentImage.src;
+            document.getElementById('results').style.display = 'none';
+        }
 
-        2.  MODIFICA LA LÓGICA EN EL EVENTO `resizeForm.addEventListener('submit', ...)`:
-            - Esta función es el "cerebro" de la herramienta. Aquí es donde ocurre la magia.
-            - Elimina la lógica del `canvas` y el redimensionamiento.
-            - En su lugar, lee los valores de tus nuevos inputs (ej: `const texto = miTextarea.value;`).
-            - Procesa esos datos según la lógica de tu nueva herramienta (ej: `const textoMayusculas = texto.toUpperCase();`).
-            - Muestra el resultado. Puedes seguir usando la `result-area` o crear nuevos elementos.
-              En lugar de actualizar `previewImage` y `downloadLink`, podrías actualizar el `textContent`
-              de un `<p>` o `<code>` dentro de `result-area`.
+        function switchPlatform(platform) {
+            currentPlatform = platform;
+            document.querySelectorAll('.platform-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelector(`[data-platform="${platform}"]`).classList.add('active');
+            loadPresets(platform);
+            trackEvent('switch_platform', platform);
+        }
 
-        3.  ACTUALIZA LOS TEXTOS Y NOMBRES:
-            - Cambia el `<title>` y la `<meta name="description">` en el `<head>`.
-            - Cambia los `<h1>` y otros textos descriptivos en la página.
-            
-        ¡Y listo! La estructura, el diseño, la responsividad y los espacios para anuncios
-        seguirán funcionando sin cambios.
-        */
-    });
-    </script>
-</body>
-</html>
+        function loadPresets(platform) {
+            const presetsGrid = document.getElementById('presetsGrid');
+            const presets = platformPresets[platform] || [];
+            presetsGrid.innerHTML = presets.map(p => `
+                <div class="preset-card" onclick="applyPreset(${p.width}, ${p.height}, '${p.name}')">
+                    <div class="preset-header">
+                        <div class="preset-name">${p.name}</div>
