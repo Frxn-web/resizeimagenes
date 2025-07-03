@@ -653,4 +653,591 @@
         .toast-container {
             position: fixed;
             bottom: 20px;
-            left
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .toast {
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            opacity: 0;
+            animation: toastFadeIn 0.5s forwards, toastFadeOut 0.5s 4.5s forwards;
+            min-width: 250px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 5px solid transparent;
+        }
+
+        .toast.success {
+            border-image: var(--success-gradient) 1;
+        }
+        .toast.error {
+            border-left-color: #f5576c;
+        }
+        .toast.info {
+            border-image: var(--primary-gradient) 1;
+        }
+
+        @keyframes toastFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes toastFadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .main-card {
+                padding: 1.5rem;
+            }
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .platform-tabs {
+                justify-content: center;
+            }
+            .presets-grid {
+                grid-template-columns: 1fr;
+            }
+            .card-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.5rem;
+            }
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">SocialResize Pro</div>
+            <div class="header-actions">
+                <button class="btn-header" onclick="toggleBatchMode()">
+                    <span>📦</span> Lote
+                </button>
+                <button class="btn-header" onclick="toggleTheme()">
+                    <span id="theme-icon">🌙</span> Tema
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="ad-zone">
+        <div style="text-align: center; opacity: 0.6; font-size: 0.9rem;">
+            📢 Espacio publicitario
+        </div>
+    </div>
+
+    <div class="container">
+        <main>
+            <div class="main-card">
+                <h1 class="card-title">Editor Universal de Imágenes 2025</h1>
+                <p class="card-subtitle">Sube tu imagen para empezar a redimensionar y optimizar para cualquier plataforma.</p>
+                
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">🖼️</div>
+                    <div class="upload-text">Arrastra tu imagen aquí o haz clic para seleccionar</div>
+                    <div class="upload-hint">Soporta JPG, PNG, WebP, GIF, SVG hasta 50MB</div>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+
+                <div id="editingControlsSection" class="hidden">
+                    <h2 class="card-title text-center mb-4">Tu Imagen Lista para Editar</h2>
+                    <div class="image-preview-container">
+                        <img id="imagePreview" src="https://placehold.co/400x250/A0A0A0/FFFFFF?text=Imagen+Cargada" alt="Previsualización de Imagen">
+                    </div>
+
+                    <div class="categories-section">
+                        <div class="categories-title">🚀 Elige cómo redimensionar:</div>
+                        <div class="categories-grid">
+                            <div class="category-card" data-mode="presets" onclick="selectEditingMode('presets')">
+                                <span class="category-icon">⚡</span>
+                                <div class="category-name">Presets Inteligentes</div>
+                                <div class="category-description">Dimensiones predefinidas para plataformas</div>
+                            </div>
+                            <div class="category-card" data-mode="free" onclick="selectEditingMode('free')">
+                                <span class="category-icon">📏</span>
+                                <div class="category-name">Redimensión Libre</div>
+                                <div class="category-description">Define tus propias dimensiones y formato</div>
+                            </div>
+                            <div class="category-card" data-mode="ai" onclick="selectEditingMode('ai')">
+                                <span class="category-icon">🤖</span>
+                                <div class="category-name">IA Avanzada</div>
+                                <div class="category-description">Eliminación de fondo, mejora automática</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="dynamicEditingContent">
+                        <div id="presetsSection" class="presets-section">
+                            <div class="presets-title">⚡ Presets por Plataforma</div>
+                            
+                            <div class="platform-tabs">
+                                <button class="platform-tab active" data-platform="social">
+                                    📱 Redes Sociales
+                                </button>
+                                <button class="platform-tab" data-platform="documents">
+                                    📄 Documentos
+                                </button>
+                                <button class="platform-tab" data-platform="business">
+                                    💼 Empresarial
+                                </button>
+                                <button class="platform-tab" data-platform="print">
+                                    🖨️ Impresión
+                                </button>
+                                <button class="platform-tab" data-platform="passport">
+                                    🛂 Pasaporte
+                                </button>
+                                <button class="platform-tab" data-platform="id">
+                                    🆔 Identificación
+                                </button>
+                            </div>
+
+                            <div class="presets-grid" id="presetsGrid">
+                                </div>
+                        </div>
+
+                        <div id="customResizeSection" class="presets-section hidden">
+                            <div class="presets-title">📐 Redimensión Personalizada</div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="customWidth" class="block text-sm font-medium text-text-secondary mb-1">Ancho (px):</label>
+                                    <input type="number" id="customWidth" class="w-full p-2 rounded-md bg-bg-secondary border border-border-color text-text-primary" placeholder="Ej: 800">
+                                </div>
+                                <div>
+                                    <label for="customHeight" class="block text-sm font-medium text-text-secondary mb-1">Alto (px):</label>
+                                    <input type="number" id="customHeight" class="w-full p-2 rounded-md bg-bg-secondary border border-border-color text-text-primary" placeholder="Ej: 600">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="exportFormat" class="block text-sm font-medium text-text-secondary mb-1">Formato de Exportación:</label>
+                                <select id="exportFormat" class="w-full p-2 rounded-md bg-bg-secondary border border-border-color text-text-primary">
+                                    <option value="png">PNG</option>
+                                    <option value="jpeg">JPG</option>
+                                    <option value="webp">WebP</option>
+                                </select>
+                            </div>
+                            <button class="btn-primary" onclick="applyCustomResize()">
+                                Aplicar Redimensión <span class="ml-2">✨</span>
+                            </button>
+                        </div>
+
+                        <div id="aiSection" class="presets-section hidden">
+                            <div class="presets-title">🤖 Funciones de IA Avanzada</div>
+                            <p class="text-text-secondary mb-4">Selecciona una función de IA para aplicar a tu imagen.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="preset-card" onclick="applyAIFeature('Eliminar Fondo')">
+                                    <div class="preset-header">
+                                        <div class="preset-name">Eliminar Fondo</div>
+                                        <div class="preset-icon">✂️</div>
+                                    </div>
+                                    <div class="preset-description">Elimina el fondo de la imagen automáticamente.</div>
+                                </div>
+                                <div class="preset-card" onclick="applyAIFeature('Mejora Automática')">
+                                    <div class="preset-header">
+                                        <div class="preset-name">Mejora Automática</div>
+                                        <div class="preset-icon">✨</div>
+                                    </div>
+                                    <div class="preset-description">Mejora la calidad, el color y la nitidez de la imagen.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="downloadImageBtn" class="btn-primary mt-6 hidden" onclick="downloadImage()">
+                        Descargar Imagen <span class="ml-2">⬇️</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3>💬 Lo que dicen nuestros usuarios</h3>
+                <blockquote style="color: var(--text-secondary); font-style: italic; margin-bottom: 1rem;">
+                    "SocialResize Pro ha transformado mi flujo de trabajo. ¡Impresionante!"
+                </blockquote>
+                <p style="font-weight: 600;">— María G., Diseñadora Gráfica</p>
+            </div>
+        </aside>
+    </div>
+
+    <div class="ad-mobile-bottom ad-zone">
+        <div style="text-align: center; opacity: 0.6; font-size: 0.8rem;">
+            📢 Anuncio móvil
+        </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script>
+        // === GLOBAL VARIABLES ===
+        let currentEditingMode = 'presets'; // Default editing mode
+        let currentImageFile = null; // Stores the uploaded image file object
+        let currentImageUrl = null; // Stores the URL of the uploaded image for preview
+        // --- NUEVAS VARIABLES GLOBALES para guardar las dimensiones ---
+        let targetWidth = 0;
+        let targetHeight = 0;
+        let targetFormat = 'png'; // Formato por defecto
+
+        // === UTILITY FUNCTIONS ===
+
+        // Function to simulate user interaction tracking
+        function trackUserInteraction(eventName, data = {}) {
+            console.log(`[Analytics] Event: ${eventName}`, data);
+        }
+
+        // Function to display "toast" notifications
+        function showToast(message, type = 'info') {
+            const toastContainer = document.getElementById('toastContainer');
+            if (!toastContainer) {
+                console.error('Toast container not found!');
+                return;
+            }
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            toastContainer.appendChild(toast);
+            toast.addEventListener('animationend', (e) => {
+                if (e.animationName === 'toastFadeOut') {
+                    toast.remove();
+                }
+            });
+        }
+
+        // === BATCH MODE LOGIC ===
+        function toggleBatchMode() {
+            const batchModal = createBatchModal();
+            document.body.appendChild(batchModal);
+            showToast('Modo lote activado', 'info');
+            trackUserInteraction('batch_mode_activated');
+        }
+
+        function createBatchModal() {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex'; // Mostrar el modal
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <button class="modal-close" onclick="this.closest('.modal').remove()">&times;</button>
+                    <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                        📦 Modo Lote Avanzado
+                    </h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                        Sube múltiples imágenes y aplica presets a todas a la vez.
+                    </p>
+                    <input type="file" multiple accept="image/*" style="display: block; margin: 1rem auto; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary);">
+                    <button class="btn-primary" onclick="showToast('Procesando imágenes en lote...', 'info'); this.closest('.modal').remove();">
+                        Procesar en Lote <span class="ml-2">⚙️</span>
+                    </button>
+                </div>
+            `;
+            return modal;
+        }
+
+        // === THEME LOGIC ===
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.textContent = '☀️';
+                trackUserInteraction('theme_changed', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '🌙';
+                trackUserInteraction('theme_changed', 'dark');
+            }
+        }
+
+        // === CATEGORY & PRESET LOGIC ===
+        const presetsData = {
+            social: [
+                { name: 'Instagram Post', icon: '📸', dimensions: '1080 × 1080 px', description: 'Post cuadrado perfecto para Instagram', width: 1080, height: 1080 },
+                { name: 'YouTube Thumbnail', icon: '🎬', dimensions: '1280 × 720 px', description: 'Miniatura perfecta para videos', width: 1280, height: 720 },
+                { name: 'Stories/Reels', icon: '📱', dimensions: '1080 × 1920 px', description: 'Formato vertical para stories y reels', width: 1080, height: 1920 },
+                { name: 'Facebook Cover', icon: '📘', dimensions: '1200 × 630 px', description: 'Portada de Facebook optimizada', width: 1200, height: 630 },
+                { name: 'Twitter Header', icon: '🐦', dimensions: '1500 × 500 px', description: 'Encabezado de perfil de Twitter', width: 1500, height: 500 },
+                { name: 'LinkedIn Banner', icon: '👔', dimensions: '1584 × 396 px', description: 'Banner de perfil profesional de LinkedIn', width: 1584, height: 396 }
+            ],
+            documents: [
+                { name: 'CV A4', icon: '📄', dimensions: '2480 × 3508 px', description: 'Formato A4 para documentos y CVs', width: 2480, height: 3508 },
+                { name: 'Certificado Legal', icon: '📜', dimensions: '1056 × 816 px', description: 'Tamaño estándar para certificados', width: 1056, height: 816 }
+            ],
+            business: [
+                { name: 'Logo Cuadrado', icon: '🏢', dimensions: '500 × 500 px', description: 'Ideal para logos de perfil de empresa', width: 500, height: 500 },
+                { name: 'Tarjeta de Visita', icon: '📇', dimensions: '1050 × 600 px', description: 'Formato estándar de tarjeta de presentación', width: 1050, height: 600 }
+            ],
+            print: [
+                { name: 'Flyer A5', icon: '🖨️', dimensions: '1748 × 2480 px', description: 'Tamaño A5 para flyers y folletos', width: 1748, height: 2480 },
+                { name: 'Poster A3', icon: '🖼️', dimensions: '3508 × 4961 px', description: 'Tamaño A3 para posters grandes', width: 3508, height: 4961 }
+            ],
+            passport: [ 
+                { name: 'Pasaporte EE.UU.', icon: '🛂', dimensions: '600 × 600 px (2x2 in)', description: 'Formato oficial de pasaporte para EE.UU.', width: 600, height: 600 },
+                { name: 'Visa Schengen', icon: '🌍', dimensions: '350 × 450 px', description: 'Formato para visa Schengen', width: 350, height: 450 }
+            ],
+            id: [ 
+                { name: 'Cédula Nacional', icon: '🆔', dimensions: '400 × 500 px', description: 'Formato estándar para cédulas de identidad', width: 400, height: 500 },
+                { name: 'Licencia Conducir', icon: '🚗', dimensions: '700 × 500 px', description: 'Formato para licencias de conducir', width: 700, height: 500 }
+            ],
+        };
+
+        // --- CORREGIDO: Function to select an editing mode
+        function selectEditingMode(mode) {
+            currentEditingMode = mode;
+            trackUserInteraction('editing_mode_selected', { mode });
+            const presetsSection = document.getElementById('presetsSection');
+            const customResizeSection = document.getElementById('customResizeSection');
+            const aiSection = document.getElementById('aiSection');
+            presetsSection.classList.add('hidden');
+            customResizeSection.classList.add('hidden');
+            aiSection.classList.add('hidden');
+
+            if (mode === 'presets') {
+                presetsSection.classList.remove('hidden');
+                renderPresets(document.querySelector('.platform-tab.active').dataset.platform);
+            } else if (mode === 'free') {
+                customResizeSection.classList.remove('hidden');
+            } else if (mode === 'ai') {
+                aiSection.classList.remove('hidden');
+            }
+
+            document.querySelectorAll('.categories-grid .category-card').forEach(card => card.classList.remove('active-mode'));
+            document.querySelector(`.categories-grid .category-card[data-mode="${mode}"]`).classList.add('active-mode');
+            document.getElementById('downloadImageBtn').classList.add('hidden');
+        }
+
+        // --- CORREGIDO: Function to apply a preset
+        function applyPreset(width, height, name) {
+            if (!currentImageFile) {
+                showToast('Por favor, sube una imagen primero.', 'error');
+                return;
+            }
+            // Guarda las dimensiones y el formato para la descarga
+            targetWidth = width;
+            targetHeight = height;
+            targetFormat = 'png'; // Los presets usarán PNG por defecto
+
+            showToast(`Preset '${name}' aplicado. Listo para descargar.`, 'success');
+            trackUserInteraction('preset_applied', { name, width, height });
+            document.getElementById('downloadImageBtn').classList.remove('hidden');
+        }
+
+        // --- CORREGIDO: Function to apply custom resize
+        function applyCustomResize() {
+            if (!currentImageFile) {
+                showToast('Por favor, sube una imagen primero.', 'error');
+                return;
+            }
+            const width = parseInt(document.getElementById('customWidth').value);
+            const height = parseInt(document.getElementById('customHeight').value);
+            const format = document.getElementById('exportFormat').value;
+
+            if (!width || !height || width <= 0 || height <= 0) {
+                showToast('Por favor, ingresa un ancho y alto válidos.', 'error');
+                return;
+            }
+            // Guarda las dimensiones y el formato para la descarga
+            targetWidth = width;
+            targetHeight = height;
+            targetFormat = format;
+
+            showToast(`Dimensiones ${width}x${height} aplicadas. Listo para descargar.`, 'success');
+            trackUserInteraction('custom_resize_applied', { width, height, format });
+            document.getElementById('downloadImageBtn').classList.remove('hidden');
+        }
+
+        // --- CORREGIDO: Function to apply AI feature (simulada por ahora)
+        function applyAIFeature(featureName) {
+            if (!currentImageFile) {
+                showToast('Por favor, sube una imagen primero.', 'error');
+                return;
+            }
+            // La lógica de IA real requiere un backend o una librería pesada.
+            // Por ahora, solo activamos la descarga de la imagen original.
+            const img = document.getElementById('imagePreview');
+            targetWidth = img.naturalWidth; // Usar dimensiones originales
+            targetHeight = img.naturalHeight;
+            targetFormat = 'png'; // La eliminación de fondo necesita PNG
+
+            showToast(`Función IA '${featureName}' simulada. Listo para descargar.`, 'info');
+            trackUserInteraction('ai_feature_applied', { featureName });
+            document.getElementById('downloadImageBtn').classList.remove('hidden');
+        }
+
+        // --- CORREGIDO: Renderiza los presets
+        function renderPresets(platform) {
+            const presetsGrid = document.getElementById('presetsGrid');
+            presetsGrid.innerHTML = '';
+            const presets = presetsData[platform] || [];
+            if (presets.length === 0) {
+                presetsGrid.innerHTML = '<p style="color: var(--text-secondary);">No hay presets disponibles.</p>';
+                return;
+            }
+            presets.forEach(preset => {
+                const presetCard = document.createElement('div');
+                presetCard.className = 'preset-card';
+                presetCard.onclick = () => applyPreset(preset.width, preset.height, preset.name);
+                presetCard.innerHTML = `
+                    <div class="preset-header">
+                        <div class="preset-name">${preset.name}</div>
+                        <div class="preset-icon">${preset.icon}</div>
+                    </div>
+                    <div class="preset-dimensions">${preset.dimensions}</div>
+                    <div class="preset-description">${preset.description}</div>
+                `;
+                presetsGrid.appendChild(presetCard);
+            });
+        }
+
+        // --- CORREGIDO: Maneja el click en las pestañas de plataforma
+        function handlePlatformTabClick(event) {
+            document.querySelectorAll('.platform-tab').forEach(tab => tab.classList.remove('active'));
+            const clickedTab = event.currentTarget;
+            clickedTab.classList.add('active');
+            const platform = clickedTab.dataset.platform;
+            renderPresets(platform);
+            trackUserInteraction('platform_tab_selected', { platform });
+            // Ocultar el botón de descarga al cambiar de pestaña
+            document.getElementById('downloadImageBtn').classList.add('hidden');
+        }
+
+        // === LÓGICA DE DESCARGA REAL ===
+        // --- COMPLETAMENTE NUEVA: Función de descarga funcional ---
+        function downloadImage() {
+            if (!currentImageFile || !currentImageUrl || targetWidth <= 0 || targetHeight <= 0) {
+                showToast('Error: No hay imagen o dimensiones válidas.', 'error');
+                return;
+            }
+
+            showToast('Preparando tu imagen...', 'info');
+
+            const img = new Image();
+            img.crossOrigin = "Anonymous"; // Necesario si la imagen viniera de otra URL
+            img.onload = () => {
+                // 1. Crear un canvas
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                // 2. Definir las dimensiones del canvas
+                canvas.width = targetWidth;
+                canvas.height = targetHeight;
+
+                // 3. Dibujar la imagen redimensionada en el canvas
+                // Esto estirará o encogerá la imagen para que encaje en el canvas
+                ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+
+                // 4. Crear un enlace de descarga
+                const link = document.createElement('a');
+                const fileName = `SocialResizePro_${targetWidth}x${targetHeight}.${targetFormat}`;
+                link.download = fileName;
+
+                // 5. Convertir el contenido del canvas a una URL de datos
+                link.href = canvas.toDataURL(`image/${targetFormat}`, 0.95); // 0.95 es la calidad para JPG/WebP
+
+                // 6. Simular un clic en el enlace para iniciar la descarga
+                link.click();
+                
+                showToast('¡Descarga iniciada!', 'success');
+                trackUserInteraction('image_downloaded', { name: fileName, width: targetWidth, height: targetHeight, format: targetFormat });
+            };
+            img.onerror = () => {
+                showToast('Error al cargar la previsualización de la imagen.', 'error');
+            };
+            img.src = currentImageUrl;
+        }
+
+        // === INITIALIZATION ===
+        document.addEventListener('DOMContentLoaded', () => {
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            const imagePreview = document.getElementById('imagePreview');
+            const editingControlsSection = document.getElementById('editingControlsSection');
+            const downloadImageBtn = document.getElementById('downloadImageBtn');
+
+            // Asignar listeners
+            document.querySelectorAll('.platform-tab').forEach(tab => {
+                tab.addEventListener('click', handlePlatformTabClick);
+            });
+            uploadArea.addEventListener('click', () => fileInput.click());
+
+            // Evento al seleccionar archivo
+            fileInput.addEventListener('change', (event) => {
+                const files = event.target.files;
+                if (files.length > 0) {
+                    currentImageFile = files[0];
+                    if (currentImageFile.size > 50 * 1024 * 1024) { // Límite de 50MB
+                        showToast('El archivo es demasiado grande (max 50MB).', 'error');
+                        return;
+                    }
+                    showToast(`"${currentImageFile.name}" listo para editar.`, 'info');
+                    trackUserInteraction('file_uploaded', { name: currentImageFile.name });
+
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        currentImageUrl = e.target.result;
+                        imagePreview.src = currentImageUrl;
+                        editingControlsSection.classList.remove('hidden');
+                        downloadImageBtn.classList.add('hidden');
+                        selectEditingMode('presets'); // Reiniciar al modo presets
+                    };
+                    reader.readAsDataURL(currentImageFile);
+                }
+            });
+
+            // Lógica de Drag & Drop
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                document.body.addEventListener(eventName, preventDefaults, false);
+            });
+            ['dragenter', 'dragover'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, () => uploadArea.style.borderColor = 'var(--text-accent)', false);
+            });
+            ['dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, () => uploadArea.style.borderColor = 'var(--border-color)', false);
+            });
+            uploadArea.addEventListener('drop', (e) => {
+                preventDefaults(e);
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                fileInput.files = files;
+                fileInput.dispatchEvent(new Event('change'));
+            }, false);
+            
+            // Renderizar presets iniciales
+            renderPresets('social');
+        });
+    </script>
+</body>
+</html>
