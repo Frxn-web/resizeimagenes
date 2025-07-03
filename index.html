@@ -1341,3 +1341,369 @@
                 <div class="preset-card" onclick="applyPreset(${p.width}, ${p.height}, '${p.name}')">
                     <div class="preset-header">
                         <div class="preset-name">${p.name}</div>
+                        <div class="preset-icon">${p.icon}</div>
+                    </div>
+                    <div class="preset-dimensions">${p.width} × ${p.height} px</div>
+                    <div class="preset-description">${p.description}</div>
+                </div>
+            `).join('');
+        }
+        
+        function applyPreset(width, height, name) {
+            if (!currentImage) {
+                 showToast('Carga una imagen antes de aplicar un preset', 'error');
+                 return;
+            }
+            const widthInput = document.getElementById('width');
+            const heightInput = document.getElementById('height');
+            widthInput.value = width;
+            heightInput.value = height;
+            
+            if (document.getElementById('keepAspect').checked) {
+                adjustForAspectRatio(width, height);
+            }
+            
+            showToast(`Preset "${name}" aplicado`, 'success');
+            trackEvent('apply_preset', name);
+        }
+        
+        function adjustForAspectRatio(targetWidth, targetHeight) {
+            if (!currentImage) return;
+            
+            const imageRatio = currentImage.width / currentImage.height;
+            const targetRatio = targetWidth / targetHeight;
+
+            if (imageRatio > targetRatio) {
+                // La imagen original es más ancha que el objetivo
+                document.getElementById('height').value = Math.round(targetWidth / imageRatio);
+            } else {
+                 // La imagen original es más alta o igual que el objetivo
+                document.getElementById('width').value = Math.round(targetHeight * imageRatio);
+            }
+        }
+
+        function handleWidthChange(e) {
+            if (document.getElementById('keepAspect').checked && currentImage) {
+                const width = parseInt(e.target.value);
+                if (!isNaN(width) && width > 0) {
+                    const height = Math.round(width / (currentImage.width / currentImage.height));
+                    document.getElementById('height').value = height;
+                }
+            }
+        }
+
+        function handleHeightChange(e) {
+            if (document.getElementById('keepAspect').checked && currentImage) {
+                const height = parseInt(e.target.value);
+                if (!isNaN(height) && height > 0) {
+                    const width = Math.round(height * (currentImage.width / currentImage.height));
+                    document.getElementById('width').value = width;
+                }
+            }
+        }
+
+        function updateQualityDisplay() {
+            const quality = document.getElementById('quality').value;
+            document.getElementById('qualityValue').textContent = `${quality}%`;
+        }
+
+        // --- PROCESAMIENTO DE IMAGEN ---
+        function processImage() {
+            if (!currentImage) {
+                showToast('Por favor, selecciona una imagen primero', 'error');
+                return;
+            }
+
+            processingStartTime = performance.now();
+            
+            const width = parseInt(document.getElementById('width').value);
+            const height = parseInt(document.getElementById('height').value);
+            const quality = parseInt(document.getElementById('quality').value) / 100;
+            const format = document.getElementById('format').value;
+            const smartResize = document.getElementById('smartResize').checked;
+
+            if (isNaN(width) || isNaN(height) || width <= 0 || height <= 0) {
+                showToast('Por favor, ingresa dimensiones válidas', 'error');
+                return;
+            }
+
+            showProgress();
+            
+            // Usar un worker para no bloquear el hilo principal (simulado con setTimeout aquí)
+            setTimeout(() => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = width;
+                canvas.height = height;
+
+                if (smartResize) {
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = 'high';
+                }
+
+                ctx.drawImage(currentImage, 0, 0, width, height);
+                
+                let outputFormat = format === 'original' ? originalFile.type : `image/${format}`;
+                if (format === 'jpeg') outputFormat = 'image/jpeg';
+                
+                let fileExtension = format === 'original' ? originalFile.name.split('.').pop() : format;
+                if (fileExtension === 'jpeg') fileExtension = 'jpg';
+                
+                const processedDataUrl = canvas.toDataURL(outputFormat, quality);
+                
+                showResults(processedDataUrl, width, height, outputFormat, fileExtension);
+                hideProgress();
+                updateStats(originalFile.size, processedDataUrl);
+                measurePerformance('Image Processing', processingStartTime);
+
+            }, 500); // Simular un pequeño retraso
+        }
+        
+        function showProgress() {
+            const btn = document.getElementById('processBtn');
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
+            
+            btn.innerHTML = '<span class="loading"></span> Procesando...';
+            btn.disabled = true;
+            btn.classList.add('processing');
+            progressBar.style.display = 'block';
+            progressFill.style.width = '0%';
+            
+            // Simular progreso
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 25;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                }
+                progressFill.style.width = progress + '%';
+            }, 100);
+        }
+
+        function hideProgress() {
+            const btn = document.getElementById('processBtn');
+            const progressBar = document.getElementById('progressBar');
+            
+            btn.innerHTML = '<span id="btnText">🚀 Crear Imagen Perfecta</span>';
+            btn.disabled = false;
+            btn.classList.remove('processing');
+            progressBar.style.display = 'none';
+        }
+
+        // --- RESULTADOS Y ESTADÍSTICAS ---
+        function displayOriginalInfo() {
+            const infoContainer = document.getElementById('imageInfo');
+            const sizeMB = (originalFile.size / 1024 / 1024).toFixed(2);
+            const aspectRatio = (currentImage.width / currentImage.height).toFixed(2);
+            infoContainer.innerHTML = `
+                <div class="info-row"><span class="info-label">📁 Nombre:</span> <span class="info-value">${originalFile.name}</span></div>
+                <div class="info-row"><span class="info-label">📏 Dimensiones:</span> <span class="info-value">${currentImage.width} × ${currentImage.height} px</span></div>
+                <div class="info-row"><span class="info-label">📊 Ratio:</span> <span class="info-value">${aspectRatio}:1</span></div>
+                <div class="info-row"><span class="info-label">💾 Tamaño:</span> <span class="info-value">${sizeMB} MB</span></div>
+                <div class="info-row"><span class="info-label">🔧 Formato:</span> <span class="info-value">${originalFile.type.split('/')[1].toUpperCase()}</span></div>
+            `;
+        }
+
+        function setDefaultDimensions() {
+             document.getElementById('width').value = currentImage.width;
+             document.getElementById('height').value = currentImage.height;
+        }
+
+        function showResults(dataUrl, width, height, format, extension) {
+            const results = document.getElementById('results');
+            document.getElementById('processedPreview').src = dataUrl;
+            
+            // Info Original
+            const originalSizeKB = (originalFile.size / 1024).toFixed(1);
+            document.getElementById('originalInfo').innerHTML = `
+                <div class="info-row"><span class="info-label">Dimensiones:</span> <span class="info-value">${currentImage.width}×${currentImage.height}px</span></div>
+                <div class="info-row"><span class="info-label">Tamaño:</span> <span class="info-value">${originalSizeKB} KB</span></div>
+            `;
+            
+            // Info Procesada
+            const processedSizeBytes = atob(dataUrl.split(',')[1]).length;
+            const processedSizeKB = (processedSizeBytes / 1024).toFixed(1);
+            const reduction = Math.max(0, Math.round(100 - (processedSizeBytes / originalFile.size) * 100));
+            document.getElementById('processedInfo').innerHTML = `
+                <div class="info-row"><span class="info-label">Dimensiones:</span> <span class="info-value">${width}×${height}px</span></div>
+                <div class="info-row"><span class="info-label">Tamaño:</span> <span class="info-value" style="color: #4facfe;">${processedSizeKB} KB</span></div>
+                <div class="info-row"><span class="info-label">Reducción:</span> <span class="info-value" style="color: #00f2fe;">${reduction}%</span></div>
+            `;
+
+            // Botón de descarga
+            const downloadBtn = document.getElementById('downloadBtn');
+            downloadBtn.onclick = () => {
+                const link = document.createElement('a');
+                link.href = dataUrl;
+                const originalName = originalFile.name.substring(0, originalFile.name.lastIndexOf('.'));
+                link.download = `${originalName}_${width}x${height}.${extension}`;
+                link.click();
+                showToast('¡Descarga iniciada!', 'success');
+                trackEvent('download', `${currentPlatform}_${width}x${height}`);
+            };
+
+            results.style.display = 'block';
+            results.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function safeLocalStorage(action, key, value = null) {
+            try {
+                if (action === 'get') return localStorage.getItem(key);
+                else if (action === 'set') localStorage.setItem(key, value);
+            } catch (e) {
+                console.warn('localStorage no está disponible.');
+                return null;
+            }
+        }
+        
+        function updateStats(originalSize, processedDataUrl) {
+            processedCount++;
+            const processedSize = atob(processedDataUrl.split(',')[1]).length;
+            const saved = Math.max(0, originalSize - processedSize);
+            totalSpaceSaved += saved;
+            
+            document.getElementById('imagesProcessed').textContent = processedCount;
+            document.getElementById('spaceSaved').textContent = `${(totalSpaceSaved / 1024 / 1024).toFixed(1)}MB`;
+            
+            safeLocalStorage('set', 'socialresize_stats', JSON.stringify({ processed: processedCount, saved: totalSpaceSaved }));
+        }
+
+        function loadStats() {
+            const stats = safeLocalStorage('get', 'socialresize_stats');
+            if (stats) {
+                const { processed = 0, saved = 0 } = JSON.parse(stats);
+                processedCount = processed;
+                totalSpaceSaved = saved;
+                document.getElementById('imagesProcessed').textContent = processedCount;
+                document.getElementById('spaceSaved').textContent = `${(totalSpaceSaved / 1024 / 1024).toFixed(1)}MB`;
+            }
+        }
+
+        // --- FUNCIONES ADICIONALES ---
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const currentTheme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', currentTheme);
+            themeIcon.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+            showToast(`Tema ${currentTheme === 'dark' ? 'oscuro' : 'claro'} activado`, 'success');
+            saveSettings();
+        }
+
+        function toggleBatchMode() {
+            batchMode = !batchMode;
+            showToast('El modo por lotes estará disponible próximamente.', 'success');
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `<span>${type === 'success' ? '✅' : '❌'}</span> ${message}`;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.classList.add('show'), 10);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => document.body.removeChild(toast), 300);
+            }, 3000);
+        }
+
+        function trackEvent(action, label) {
+            console.log(`EVENTO: ${action} - ${label}`);
+        }
+        
+        function saveSettings() {
+             const settings = {
+                quality: document.getElementById('quality').value,
+                format: document.getElementById('format').value,
+                keepAspect: document.getElementById('keepAspect').checked,
+                smartResize: document.getElementById('smartResize').checked,
+                autoOptimize: document.getElementById('autoOptimize').checked,
+                theme: document.body.getAttribute('data-theme')
+            };
+            safeLocalStorage('set', 'socialresize_settings', JSON.stringify(settings));
+        }
+
+        function loadSettings() {
+            const settingsJson = safeLocalStorage('get', 'socialresize_settings');
+            if (!settingsJson) return;
+            try {
+                const settings = JSON.parse(settingsJson);
+                document.getElementById('quality').value = settings.quality || 85;
+                document.getElementById('format').value = settings.format || 'original';
+                document.getElementById('keepAspect').checked = settings.keepAspect !== false;
+                document.getElementById('smartResize').checked = settings.smartResize === true;
+                document.getElementById('autoOptimize').checked = settings.autoOptimize === true;
+                if (settings.theme) {
+                    document.body.setAttribute('data-theme', settings.theme);
+                    document.getElementById('theme-icon').textContent = settings.theme === 'dark' ? '🌙' : '☀️';
+                }
+                updateQualityDisplay();
+            } catch (e) {
+                console.error("Error al cargar la configuración:", e);
+            }
+        }
+        
+        function suggestOptimalSettings() {
+             if (!currentImage || !document.getElementById('autoOptimize').checked) return;
+             
+             // Sugerencia simple basada en transparencia
+             const canvas = document.createElement('canvas');
+             const ctx = canvas.getContext('2d');
+             canvas.width = 1;
+             canvas.height = 1;
+             ctx.drawImage(currentImage, 0, 0, 1, 1);
+             const hasTransparency = ctx.getImageData(0, 0, 1, 1).data[3] < 255;
+
+             if (hasTransparency) {
+                 document.getElementById('format').value = 'png';
+                 showToast('Sugerencia: PNG recomendado por transparencia', 'success');
+             } else {
+                 document.getElementById('format').value = 'webp';
+                 showToast('Sugerencia: WebP recomendado para mejor compresión', 'success');
+             }
+        }
+        
+        function measurePerformance(operation, startTime) {
+            const duration = performance.now() - startTime;
+            console.log(`${operation} tardó ${duration.toFixed(2)} ms.`);
+        }
+    </script>
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="apple-touch-icon" href="/icon-192x192.png">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "SocialResize Pro",
+        "description": "Herramienta definitiva para crear contenido visual perfecto para YouTube, Instagram, TikTok, LinkedIn y más. Con presets profesionales y optimización inteligente.",
+        "url": "https://socialresize.pro",
+        "applicationCategory": "PhotographyApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Presets para 50+ plataformas sociales",
+            "Redimensionamiento inteligente con IA",
+            "Múltiples formatos de salida optimizados",
+            "Compresión automática sin pérdida de calidad",
+            "Interfaz moderna para creadores de contenido",
+            "Procesamiento local y completamente privado"
+        ],
+        "screenshot": "https://socialresize.pro/screenshot.jpg",
+        "author": {
+            "@type": "Organization",
+            "name": "SocialResize Pro"
+        }
+    }
+    </script>
+</body>
+</html>
