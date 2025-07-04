@@ -34,54 +34,76 @@
 
         /* Variables CSS para el tema claro */
         [data-theme="light"] {
-            --primary-gradient: linear-gradient(135deg, #4299e1 0%, #805ad5 100%); /* Ajustado para tema claro */
-            --success-gradient: linear-gradient(135deg, #38b2ac 0%, #319795 100%); /* Ajustado para tema claro */
+            --primary-gradient: linear-gradient(135deg, #4299e1 0%, #805ad5 100%);
+            --success-gradient: linear-gradient(135deg, #38b2ac 0%, #319795 100%);
             --bg-primary: #f8fafc;
             --bg-secondary: #ffffff;
             --bg-card: rgba(255, 255, 255, 0.95);
             --bg-preset: rgba(0, 0, 0, 0.03);
             --text-primary: #1a202c;
             --text-secondary: #4a5568;
-            --text-accent: #4299e1; /* Ajustado para tema claro */
+            --text-accent: #4299e1;
             --border-color: rgba(0, 0, 0, 0.1);
             --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        /* === SISTEMA PUBLICITARIO LIMPIO (General) === */
-        .ad-zone {
-            margin: 2rem 0;
+        /* === SISTEMA PUBLICITARIO OPTIMIZADO === */
+        .ad-container {
+            margin: 1.5rem 0;
             padding: 1rem;
             background: linear-gradient(145deg, var(--bg-preset), transparent);
             border-radius: var(--border-radius);
             position: relative;
             overflow: hidden;
-            min-height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-secondary); /* Asegura visibilidad del texto en ambos temas */
+            border: 1px solid var(--border-color);
+            backdrop-filter: var(--blur-bg);
         }
 
-        .ad-zone::before {
+        .ad-container::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 1px;
+            height: 2px;
             background: var(--primary-gradient);
             opacity: 0.3;
         }
 
-        .ad-sticky-top {
+        /* Anuncio superior sticky - Mayor visibilidad */
+        .ad-header-sticky {
             position: sticky;
-            top: 80px;
-            z-index: 100;
-            margin: 0 0 1rem 0;
+            top: 70px;
+            z-index: 999;
+            margin: 0 0 1.5rem 0;
+            background: var(--bg-card);
+            backdrop-filter: var(--blur-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem;
         }
 
+        /* Anuncio lateral en desktop */
+        .ad-sidebar {
+            position: sticky;
+            top: 150px;
+            margin: 1rem 0;
+        }
+
+        /* Anuncio entre contenido - Muy efectivo */
+        .ad-content-break {
+            margin: 2.5rem 0;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* Anuncio móvil inferior fijo */
         .ad-mobile-bottom {
-            display: none; /* Oculto por defecto, se muestra en móvil */
+            display: none;
             position: fixed;
             bottom: 0;
             left: 0;
@@ -90,13 +112,30 @@
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
             padding: 0.5rem;
+            backdrop-filter: var(--blur-bg);
         }
 
-        /* Media query para estilos responsivos en móviles */
+        /* Responsive para anuncios */
         @media (max-width: 768px) {
-            .ad-mobile-bottom { display: block; } /* Muestra el anuncio inferior en móviles */
-            body { padding-bottom: 70px; } /* Añade padding para que el contenido no quede debajo del anuncio fijo */
-            .ad-zone { margin: 1.5rem 0; min-height: 70px; }
+            .ad-mobile-bottom { 
+                display: block; 
+            }
+            body { 
+                padding-bottom: 70px; 
+            }
+            .ad-sidebar {
+                display: none; /* Ocultar anuncios laterales en móvil */
+            }
+            .ad-container {
+                margin: 1rem 0;
+                padding: 0.75rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .ad-sidebar {
+                position: static; /* No sticky en tablets */
+            }
         }
 
         /* === ESTILOS PRINCIPALES === */
@@ -112,7 +151,7 @@
             color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
-            overflow-x: hidden; /* Evita el scroll horizontal */
+            overflow-x: hidden;
         }
 
         /* Fondo con gradientes flotantes para un efecto visual atractivo */
@@ -127,22 +166,21 @@
                 radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
-            z-index: -1; /* Asegura que esté detrás del contenido */
-            animation: float 20s ease-in-out infinite; /* Animación de movimiento */
+            z-index: -1;
+            animation: float 20s ease-in-out infinite;
         }
 
-        /* Animación para el fondo flotante */
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(1deg); }
         }
 
         .header {
-            background: rgba(26, 26, 46, 0.95); /* Fondo semi-transparente */
-            backdrop-filter: var(--blur-bg); /* Efecto de desenfoque */
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: var(--blur-bg);
             border-bottom: 1px solid var(--border-color);
             padding: 1rem 0;
-            position: sticky; /* Se mantiene en la parte superior al hacer scroll */
+            position: sticky;
             top: 0;
             z-index: 1000;
         }
@@ -157,7 +195,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+            flex-wrap: wrap;
             gap: 1rem;
         }
 
@@ -165,8 +203,8 @@
             font-size: 1.8rem;
             font-weight: 700;
             background: var(--primary-gradient);
-            -webkit-background-clip: text; /* Para texto con gradiente en WebKit */
-            -webkit-text-fill-color: transparent; /* Para texto con gradiente en WebKit */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             background-clip: text;
             display: flex;
             align-items: center;
@@ -174,7 +212,7 @@
         }
 
         .logo::before {
-            content: '🎨'; /* Icono de paleta de artista */
+            content: '🎨';
             font-size: 1.5rem;
         }
 
@@ -211,14 +249,13 @@
             margin: 0 auto;
             padding: 2rem;
             display: grid;
-            grid-template-columns: 1fr 350px; /* Columna principal y sidebar */
+            grid-template-columns: 1fr 350px;
             gap: 2rem;
         }
 
-        /* Responsive para el layout principal */
         @media (max-width: 1200px) {
             .container {
-                grid-template-columns: 1fr; /* Una sola columna en pantallas más pequeñas */
+                grid-template-columns: 1fr;
                 padding: 1rem;
             }
         }
@@ -262,7 +299,7 @@
             line-height: 1.7;
         }
 
-        /* === SECCIÓN DE CATEGORÍAS (Ahora para modos de edición) === */
+        /* === SECCIÓN DE CATEGORÍAS === */
         .categories-section {
             margin: 2rem 0;
         }
@@ -304,12 +341,12 @@
             right: 0;
             height: 3px;
             background: var(--primary-gradient);
-            transform: scaleX(0); /* Inicialmente oculto */
+            transform: scaleX(0);
             transition: transform 0.3s ease;
         }
 
         .category-card:hover::before {
-            transform: scaleX(1); /* Se expande al pasar el ratón */
+            transform: scaleX(1);
         }
 
         .category-card:hover {
@@ -318,7 +355,6 @@
             box-shadow: var(--shadow-hover);
         }
 
-        /* Estilo para la categoría activa */
         .category-card.active-mode {
             background: rgba(102, 126, 234, 0.2);
             border-color: var(--text-accent);
@@ -373,7 +409,6 @@
             animation: bounce 2s infinite;
         }
 
-        /* Animación de rebote para el icono de subida */
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-10px); }
@@ -399,7 +434,7 @@
             border-radius: var(--border-radius);
             padding: 2.5rem;
             box-shadow: var(--shadow-soft);
-            margin-top: 2rem; /* Espacio después del área de carga */
+            margin-top: 2rem;
         }
 
         .image-preview-container {
@@ -415,13 +450,12 @@
         }
         .image-preview-container img {
             max-width: 100%;
-            max-height: 250px; /* Limita la altura de la previsualización */
+            max-height: 250px;
             object-fit: contain;
             border-radius: 8px;
         }
 
-        /* Secciones de Presets, Redimensión Personalizada, IA */
-        .presets-section { /* Nombre genérico para estas sub-secciones */
+        .presets-section {
             margin-top: 2rem;
         }
 
@@ -605,7 +639,7 @@
             box-shadow: var(--shadow-hover);
         }
 
-        /* Modal (general, utilizado para toasts y otros mensajes) */
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -617,8 +651,8 @@
             backdrop-filter: blur(5px);
             z-index: 10000;
             padding: 2rem;
-            justify-content: center; /* Centra el modal */
-            align-items: center; /* Centra el modal */
+            justify-content: center;
+            align-items: center;
         }
 
         .modal-content {
@@ -629,10 +663,9 @@
             margin: auto;
             position: relative;
             animation: modalSlide 0.3s ease;
-            color: var(--text-primary); /* Asegura que el texto sea visible en el modal */
+            color: var(--text-primary);
         }
 
-        /* Animación para el modal */
         @keyframes modalSlide {
             from { transform: translateY(-50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
@@ -750,9 +783,19 @@
         </div>
     </header>
 
-    <div class="ad-zone">
-        <div style="text-align: center; opacity: 0.6; font-size: 0.9rem;">
-            📢 Espacio publicitario
+    <!-- Anuncio Superior Sticky (728x90) - Máxima visibilidad -->
+    <div class="ad-header-sticky">
+        <div class="ad-container">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'b84a9fd773763386a1683b93e0df4712',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/b84a9fd773763386a1683b93e0df4712/invoke.js"></script>
         </div>
     </div>
 
@@ -767,6 +810,22 @@
                     <div class="upload-text">Arrastra tu imagen aquí o haz clic para seleccionar</div>
                     <div class="upload-hint">Soporta JPG, PNG, WebP, GIF, SVG hasta 50MB</div>
                     <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+
+                <!-- Anuncio entre contenido principal (300x250) - Muy efectivo -->
+                <div class="ad-content-break">
+                    <div class="ad-container">
+                        <script type="text/javascript">
+                            atOptions = {
+                                'key' : '19fcf0a9e4d8268bc2cb5e0e23d153c9',
+                                'format' : 'iframe',
+                                'height' : 250,
+                                'width' : 300,
+                                'params' : {}
+                            };
+                        </script>
+                        <script type="text/javascript" src="//www.highperformanceformat.com/19fcf0a9e4d8268bc2cb5e0e23d153c9/invoke.js"></script>
+                    </div>
                 </div>
 
                 <div id="editingControlsSection" class="hidden">
@@ -876,10 +935,42 @@
                         Descargar Imagen <span class="ml-2">⬇️</span>
                     </button>
                 </div>
+
+                <!-- Anuncio después del contenido principal (468x60) - Buena posición -->
+                <div class="ad-content-break">
+                    <div class="ad-container">
+                        <script type="text/javascript">
+                            atOptions = {
+                                'key' : '430b0049a61223d405a30c18abd39546',
+                                'format' : 'iframe',
+                                'height' : 60,
+                                'width' : 468,
+                                'params' : {}
+                            };
+                        </script>
+                        <script type="text/javascript" src="//www.highperformanceformat.com/430b0049a61223d405a30c18abd39546/invoke.js"></script>
+                    </div>
+                </div>
             </div>
         </main>
 
         <aside class="sidebar">
+            <!-- Anuncio en sidebar (300x250) - Posición estratégica -->
+            <div class="ad-sidebar">
+                <div class="ad-container">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : '19fcf0a9e4d8268bc2cb5e0e23d153c9',
+                            'format' : 'iframe',
+                            'height' : 250,
+                            'width' : 300,
+                            'params' : {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//www.highperformanceformat.com/19fcf0a9e4d8268bc2cb5e0e23d153c9/invoke.js"></script>
+                </div>
+            </div>
+
             <div class="sidebar-card">
                 <h3>💬 Lo que dicen nuestros usuarios</h3>
                 <blockquote style="color: var(--text-secondary); font-style: italic; margin-bottom: 1rem;">
@@ -890,9 +981,19 @@
         </aside>
     </div>
 
-    <div class="ad-mobile-bottom ad-zone">
-        <div style="text-align: center; opacity: 0.6; font-size: 0.8rem;">
-            📢 Anuncio móvil
+    <!-- Anuncio móvil inferior fijo (320x50) - Solo móviles -->
+    <div class="ad-mobile-bottom">
+        <div class="ad-container">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '3930d947f3ba430a144de6a407147e2e',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/3930d947f3ba430a144de6a407147e2e/invoke.js"></script>
         </div>
     </div>
 
@@ -900,22 +1001,18 @@
 
     <script>
         // === GLOBAL VARIABLES ===
-        let currentEditingMode = 'presets'; // Default editing mode
-        let currentImageFile = null; // Stores the uploaded image file object
-        let currentImageUrl = null; // Stores the URL of the uploaded image for preview
-        // --- NUEVAS VARIABLES GLOBALES para guardar las dimensiones ---
+        let currentEditingMode = 'presets';
+        let currentImageFile = null;
+        let currentImageUrl = null;
         let targetWidth = 0;
         let targetHeight = 0;
-        let targetFormat = 'png'; // Formato por defecto
+        let targetFormat = 'png';
 
         // === UTILITY FUNCTIONS ===
-
-        // Function to simulate user interaction tracking
         function trackUserInteraction(eventName, data = {}) {
             console.log(`[Analytics] Event: ${eventName}`, data);
         }
 
-        // Function to display "toast" notifications
         function showToast(message, type = 'info') {
             const toastContainer = document.getElementById('toastContainer');
             if (!toastContainer) {
@@ -944,7 +1041,7 @@
         function createBatchModal() {
             const modal = document.createElement('div');
             modal.className = 'modal';
-            modal.style.display = 'flex'; // Mostrar el modal
+            modal.style.display = 'flex';
             modal.innerHTML = `
                 <div class="modal-content">
                     <button class="modal-close" onclick="this.closest('.modal').remove()">&times;</button>
@@ -1010,7 +1107,6 @@
             ],
         };
 
-        // --- CORREGIDO: Function to select an editing mode
         function selectEditingMode(mode) {
             currentEditingMode = mode;
             trackUserInteraction('editing_mode_selected', { mode });
@@ -1035,23 +1131,20 @@
             document.getElementById('downloadImageBtn').classList.add('hidden');
         }
 
-        // --- CORREGIDO: Function to apply a preset
         function applyPreset(width, height, name) {
             if (!currentImageFile) {
                 showToast('Por favor, sube una imagen primero.', 'error');
                 return;
             }
-            // Guarda las dimensiones y el formato para la descarga
             targetWidth = width;
             targetHeight = height;
-            targetFormat = 'png'; // Los presets usarán PNG por defecto
+            targetFormat = 'png';
 
             showToast(`Preset '${name}' aplicado. Listo para descargar.`, 'success');
             trackUserInteraction('preset_applied', { name, width, height });
             document.getElementById('downloadImageBtn').classList.remove('hidden');
         }
 
-        // --- CORREGIDO: Function to apply custom resize
         function applyCustomResize() {
             if (!currentImageFile) {
                 showToast('Por favor, sube una imagen primero.', 'error');
@@ -1065,7 +1158,6 @@
                 showToast('Por favor, ingresa un ancho y alto válidos.', 'error');
                 return;
             }
-            // Guarda las dimensiones y el formato para la descarga
             targetWidth = width;
             targetHeight = height;
             targetFormat = format;
@@ -1075,25 +1167,21 @@
             document.getElementById('downloadImageBtn').classList.remove('hidden');
         }
 
-        // --- CORREGIDO: Function to apply AI feature (simulada por ahora)
         function applyAIFeature(featureName) {
             if (!currentImageFile) {
                 showToast('Por favor, sube una imagen primero.', 'error');
                 return;
             }
-            // La lógica de IA real requiere un backend o una librería pesada.
-            // Por ahora, solo activamos la descarga de la imagen original.
             const img = document.getElementById('imagePreview');
-            targetWidth = img.naturalWidth; // Usar dimensiones originales
+            targetWidth = img.naturalWidth;
             targetHeight = img.naturalHeight;
-            targetFormat = 'png'; // La eliminación de fondo necesita PNG
+            targetFormat = 'png';
 
             showToast(`Función IA '${featureName}' simulada. Listo para descargar.`, 'info');
             trackUserInteraction('ai_feature_applied', { featureName });
             document.getElementById('downloadImageBtn').classList.remove('hidden');
         }
 
-        // --- CORREGIDO: Renderiza los presets
         function renderPresets(platform) {
             const presetsGrid = document.getElementById('presetsGrid');
             presetsGrid.innerHTML = '';
@@ -1118,7 +1206,6 @@
             });
         }
 
-        // --- CORREGIDO: Maneja el click en las pestañas de plataforma
         function handlePlatformTabClick(event) {
             document.querySelectorAll('.platform-tab').forEach(tab => tab.classList.remove('active'));
             const clickedTab = event.currentTarget;
@@ -1126,12 +1213,10 @@
             const platform = clickedTab.dataset.platform;
             renderPresets(platform);
             trackUserInteraction('platform_tab_selected', { platform });
-            // Ocultar el botón de descarga al cambiar de pestaña
             document.getElementById('downloadImageBtn').classList.add('hidden');
         }
 
-        // === LÓGICA DE DESCARGA REAL ===
-        // --- COMPLETAMENTE NUEVA: Función de descarga funcional ---
+        // === DOWNLOAD LOGIC ===
         function downloadImage() {
             if (!currentImageFile || !currentImageUrl || targetWidth <= 0 || targetHeight <= 0) {
                 showToast('Error: No hay imagen o dimensiones válidas.', 'error');
@@ -1141,29 +1226,22 @@
             showToast('Preparando tu imagen...', 'info');
 
             const img = new Image();
-            img.crossOrigin = "Anonymous"; // Necesario si la imagen viniera de otra URL
+            img.crossOrigin = "Anonymous";
             img.onload = () => {
-                // 1. Crear un canvas
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
 
-                // 2. Definir las dimensiones del canvas
                 canvas.width = targetWidth;
                 canvas.height = targetHeight;
 
-                // 3. Dibujar la imagen redimensionada en el canvas
-                // Esto estirará o encogerá la imagen para que encaje en el canvas
                 ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
 
-                // 4. Crear un enlace de descarga
                 const link = document.createElement('a');
                 const fileName = `SocialResizePro_${targetWidth}x${targetHeight}.${targetFormat}`;
                 link.download = fileName;
 
-                // 5. Convertir el contenido del canvas a una URL de datos
-                link.href = canvas.toDataURL(`image/${targetFormat}`, 0.95); // 0.95 es la calidad para JPG/WebP
+                link.href = canvas.toDataURL(`image/${targetFormat}`, 0.95);
 
-                // 6. Simular un clic en el enlace para iniciar la descarga
                 link.click();
                 
                 showToast('¡Descarga iniciada!', 'success');
@@ -1183,18 +1261,16 @@
             const editingControlsSection = document.getElementById('editingControlsSection');
             const downloadImageBtn = document.getElementById('downloadImageBtn');
 
-            // Asignar listeners
             document.querySelectorAll('.platform-tab').forEach(tab => {
                 tab.addEventListener('click', handlePlatformTabClick);
             });
             uploadArea.addEventListener('click', () => fileInput.click());
 
-            // Evento al seleccionar archivo
             fileInput.addEventListener('change', (event) => {
                 const files = event.target.files;
                 if (files.length > 0) {
                     currentImageFile = files[0];
-                    if (currentImageFile.size > 50 * 1024 * 1024) { // Límite de 50MB
+                    if (currentImageFile.size > 50 * 1024 * 1024) {
                         showToast('El archivo es demasiado grande (max 50MB).', 'error');
                         return;
                     }
@@ -1207,13 +1283,12 @@
                         imagePreview.src = currentImageUrl;
                         editingControlsSection.classList.remove('hidden');
                         downloadImageBtn.classList.add('hidden');
-                        selectEditingMode('presets'); // Reiniciar al modo presets
+                        selectEditingMode('presets');
                     };
                     reader.readAsDataURL(currentImageFile);
                 }
             });
 
-            // Lógica de Drag & Drop
             function preventDefaults(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -1235,7 +1310,6 @@
                 fileInput.dispatchEvent(new Event('change'));
             }, false);
             
-            // Renderizar presets iniciales
             renderPresets('social');
         });
     </script>
