@@ -9,8 +9,12 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Nuevos scripts de monetización de lemonpier.com -->
+    <script type='text/javascript' src='//lemonpier.com/b0/c5/8c/b0c58cdef7e2a85d09f004740d2d14fc.js'></script>
+    <script async="async" data-cfasync="false" src="//lemonpier.com/0b7c19b272f3bde56c43dc01aa25544b/invoke.js"></script>
+    
     <style>
-        /* Definición de variables CSS para un tema oscuro por defecto */
+        /* === VARIABLES CSS MEJORADAS === */
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
@@ -47,7 +51,7 @@
             --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        /* === SISTEMA PUBLICITARIO OPTIMIZADO === */
+        /* === SISTEMA PUBLICITARIO OPTIMIZADO PARA LEMONPIER === */
         .ad-container {
             margin: 1.5rem 0;
             padding: 1rem;
@@ -60,6 +64,7 @@
             justify-content: center;
             border: 1px solid var(--border-color);
             backdrop-filter: var(--blur-bg);
+            min-height: 100px;
         }
 
         .ad-container::before {
@@ -73,35 +78,35 @@
             opacity: 0.3;
         }
 
-        /* Anuncio superior sticky - Mayor visibilidad */
+        /* Anuncio superior sticky - Optimizado para móvil */
         .ad-header-sticky {
             position: sticky;
             top: 70px;
             z-index: 999;
-            margin: 0 0 1.5rem 0;
+            margin: 0 0 1rem 0;
             background: var(--bg-card);
             backdrop-filter: var(--blur-bg);
             border-bottom: 1px solid var(--border-color);
-            padding: 0.75rem;
+            padding: 0.5rem;
         }
 
-        /* Anuncio lateral en desktop */
+        /* Anuncio lateral - Oculto en móvil, visible en desktop */
         .ad-sidebar {
             position: sticky;
             top: 150px;
             margin: 1rem 0;
         }
 
-        /* Anuncio entre contenido - Muy efectivo */
+        /* Anuncio entre contenido - Responsive */
         .ad-content-break {
-            margin: 2.5rem 0;
+            margin: 2rem 0;
             padding: 1.5rem;
             background: var(--bg-card);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-soft);
         }
 
-        /* Anuncio móvil inferior fijo */
+        /* Anuncio móvil inferior fijo - Mejorado */
         .ad-mobile-bottom {
             display: none;
             position: fixed;
@@ -113,32 +118,50 @@
             border-top: 1px solid var(--border-color);
             padding: 0.5rem;
             backdrop-filter: var(--blur-bg);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Responsive para anuncios */
+        /* Contenedor para los nuevos anuncios de lemonpier */
+        .lemonpier-ad {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90px;
+        }
+
+        /* === RESPONSIVE MEJORADO === */
         @media (max-width: 768px) {
             .ad-mobile-bottom { 
                 display: block; 
             }
             body { 
-                padding-bottom: 70px; 
+                padding-bottom: 80px; 
             }
             .ad-sidebar {
-                display: none; /* Ocultar anuncios laterales en móvil */
+                display: none;
             }
             .ad-container {
                 margin: 1rem 0;
                 padding: 0.75rem;
+                min-height: 80px;
+            }
+            .ad-header-sticky {
+                top: 60px;
+                padding: 0.25rem;
+            }
+            .lemonpier-ad {
+                min-height: 60px;
             }
         }
 
         @media (min-width: 769px) and (max-width: 1200px) {
             .ad-sidebar {
-                position: static; /* No sticky en tablets */
+                position: static;
             }
         }
 
-        /* === ESTILOS PRINCIPALES === */
+        /* === ESTILOS PRINCIPALES MEJORADOS === */
         * {
             margin: 0;
             padding: 0;
@@ -154,7 +177,7 @@
             overflow-x: hidden;
         }
 
-        /* Fondo con gradientes flotantes para un efecto visual atractivo */
+        /* Fondo mejorado con gradientes flotantes */
         body::before {
             content: '';
             position: fixed;
@@ -175,11 +198,12 @@
             50% { transform: translateY(-20px) rotate(1deg); }
         }
 
+        /* Header mejorado para móvil */
         .header {
             background: rgba(26, 26, 46, 0.95);
             backdrop-filter: var(--blur-bg);
             border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
+            padding: 0.75rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -191,16 +215,15 @@
         .header-content {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
             gap: 1rem;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
@@ -213,29 +236,28 @@
 
         .logo::before {
             content: '🎨';
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
 
         .header-actions {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             align-items: center;
-            flex-wrap: wrap;
         }
 
         .btn-header {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 50px;
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             color: var(--text-primary);
             cursor: pointer;
             transition: var(--transition);
             backdrop-filter: var(--blur-bg);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
+            gap: 0.3rem;
+            font-size: 0.8rem;
             text-decoration: none;
         }
 
@@ -244,32 +266,41 @@
             box-shadow: var(--shadow-hover);
         }
 
+        /* Container responsive mejorado */
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
             display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 2rem;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
         }
 
-        @media (max-width: 1200px) {
+        @media (min-width: 1200px) {
             .container {
-                grid-template-columns: 1fr;
-                padding: 1rem;
+                grid-template-columns: 1fr 350px;
+                gap: 2rem;
+                padding: 2rem;
             }
         }
 
+        /* Main card mejorado para móvil */
         .main-card {
             background: var(--bg-card);
             backdrop-filter: var(--blur-bg);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
-            padding: 2.5rem;
+            padding: 1.5rem;
             box-shadow: var(--shadow-soft);
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .main-card {
+                padding: 2.5rem;
+            }
         }
 
         .main-card::before {
@@ -283,29 +314,43 @@
         }
 
         .card-title {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .card-title {
+                font-size: 2.2rem;
+            }
         }
 
         .card-subtitle {
             color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
-        /* === SECCIÓN DE CATEGORÍAS === */
+        @media (min-width: 768px) {
+            .card-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* === SECCIÓN DE CATEGORÍAS MÓVIL === */
         .categories-section {
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
 
         .categories-title {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: var(--text-accent);
@@ -314,23 +359,54 @@
             gap: 0.5rem;
         }
 
+        @media (min-width: 768px) {
+            .categories-title {
+                font-size: 1.4rem;
+            }
+        }
+
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 480px) {
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .categories-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
         }
 
         .category-card {
             background: var(--bg-preset);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
-            padding: 1.5rem;
+            padding: 1rem;
             cursor: pointer;
             transition: var(--transition);
             text-align: center;
             position: relative;
             overflow: hidden;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .category-card {
+                padding: 1.5rem;
+                min-height: 140px;
+            }
         }
 
         .category-card::before {
@@ -345,55 +421,76 @@
             transition: transform 0.3s ease;
         }
 
-        .category-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .category-card:hover {
-            background: rgba(102, 126, 234, 0.1);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .category-card.active-mode {
-            background: rgba(102, 126, 234, 0.2);
-            border-color: var(--text-accent);
-            box-shadow: var(--shadow-hover);
-        }
+        .category-card:hover::before,
         .category-card.active-mode::before {
             transform: scaleX(1);
         }
 
+        .category-card:hover,
+        .category-card.active-mode {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
         .category-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
             display: block;
+        }
+
+        @media (min-width: 768px) {
+            .category-icon {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
         }
 
         .category-name {
             font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        @media (min-width: 768px) {
+            .category-name {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
         }
 
         .category-description {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.4;
+            font-size: 0.8rem;
+            line-height: 1.3;
         }
 
-        /* Upload Area */
+        @media (min-width: 768px) {
+            .category-description {
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+        }
+
+        /* Upload Area mejorado para móvil */
         .upload-area {
             border: 2px dashed var(--border-color);
             border-radius: var(--border-radius);
-            padding: 3rem 2rem;
+            padding: 2rem 1rem;
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
             background: var(--bg-preset);
-            margin: 2rem 0;
+            margin: 1.5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .upload-area {
+                padding: 3rem 2rem;
+                margin: 2rem 0;
+            }
         }
 
         .upload-area:hover {
@@ -403,10 +500,17 @@
         }
 
         .upload-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
             opacity: 0.8;
             animation: bounce 2s infinite;
+        }
+
+        @media (min-width: 768px) {
+            .upload-icon {
+                font-size: 3.5rem;
+                margin-bottom: 1rem;
+            }
         }
 
         @keyframes bounce {
@@ -416,51 +520,92 @@
         }
 
         .upload-text {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             margin-bottom: 0.5rem;
             font-weight: 600;
         }
 
-        .upload-hint {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+        @media (min-width: 768px) {
+            .upload-text {
+                font-size: 1.3rem;
+            }
         }
 
-        /* Sección de Controles de Edición */
+        .upload-hint {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .upload-hint {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Sección de Controles de Edición mejorada */
         #editingControlsSection {
             background: var(--bg-card);
             backdrop-filter: var(--blur-bg);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
-            padding: 2.5rem;
+            padding: 1.5rem;
             box-shadow: var(--shadow-soft);
-            margin-top: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            #editingControlsSection {
+                padding: 2.5rem;
+                margin-top: 2rem;
+            }
         }
 
         .image-preview-container {
-            min-height: 200px;
+            min-height: 150px;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
-            padding: 1rem;
-            margin-bottom: 1.5rem;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
         }
+
+        @media (min-width: 768px) {
+            .image-preview-container {
+                min-height: 200px;
+                padding: 1rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+
         .image-preview-container img {
             max-width: 100%;
-            max-height: 250px;
+            max-height: 200px;
             object-fit: contain;
             border-radius: 8px;
         }
 
+        @media (min-width: 768px) {
+            .image-preview-container img {
+                max-height: 250px;
+            }
+        }
+
+        /* Presets mejorados para móvil */
         .presets-section {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .presets-section {
+                margin-top: 2rem;
+            }
         }
 
         .presets-title {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: var(--text-accent);
@@ -469,27 +614,52 @@
             gap: 0.5rem;
         }
 
+        @media (min-width: 768px) {
+            .presets-title {
+                font-size: 1.4rem;
+            }
+        }
+
         .platform-tabs {
             display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            gap: 0.3rem;
+            margin-bottom: 1rem;
             flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .platform-tabs {
+                gap: 0.5rem;
+                margin-bottom: 1.5rem;
+                justify-content: flex-start;
+            }
         }
 
         .platform-tab {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 25px;
-            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            padding: 0.4rem 0.8rem;
             cursor: pointer;
             transition: var(--transition);
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.3rem;
             color: var(--text-primary);
             opacity: 0.8;
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+            .platform-tab {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+                gap: 0.5rem;
+                border-radius: 25px;
+            }
         }
 
         .platform-tab.active {
@@ -503,19 +673,38 @@
 
         .presets-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 480px) {
+            .presets-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .presets-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 1rem;
+            }
         }
 
         .preset-card {
             background: var(--bg-preset);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
-            padding: 1rem;
+            padding: 0.75rem;
             cursor: pointer;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .preset-card {
+                padding: 1rem;
+            }
         }
 
         .preset-card:hover {
@@ -528,35 +717,73 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        @media (min-width: 768px) {
+            .preset-header {
+                margin-bottom: 0.5rem;
+            }
         }
 
         .preset-name {
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .preset-name {
+                font-size: 1rem;
+            }
         }
 
         .preset-icon {
-            font-size: 1.2rem;
+            font-size: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .preset-icon {
+                font-size: 1.2rem;
+            }
         }
 
         .preset-dimensions {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 0.3rem;
+            font-size: 0.8rem;
+            margin-bottom: 0.2rem;
+        }
+
+        @media (min-width: 768px) {
+            .preset-dimensions {
+                font-size: 0.9rem;
+                margin-bottom: 0.3rem;
+            }
         }
 
         .preset-description {
             color: var(--text-secondary);
-            font-size: 0.8rem;
-            line-height: 1.4;
+            font-size: 0.75rem;
+            line-height: 1.3;
         }
 
-        /* Sidebar */
+        @media (min-width: 768px) {
+            .preset-description {
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+        }
+
+        /* Sidebar responsive */
         .sidebar {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
+        }
+
+        @media (min-width: 1200px) {
+            .sidebar {
+                gap: 1.5rem;
+            }
         }
 
         .sidebar-card {
@@ -564,11 +791,18 @@
             backdrop-filter: var(--blur-bg);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
-            padding: 1.5rem;
+            padding: 1rem;
             box-shadow: var(--shadow-soft);
             position: relative;
             overflow: hidden;
         }
+
+        @media (min-width: 1200px) {
+            .sidebar-card {
+                padding: 1.5rem;
+            }
+        }
+
         [data-theme="light"] .sidebar-card {
             background: rgba(255, 255, 255, 0.95);
         }
@@ -585,11 +819,18 @@
 
         .sidebar-card h3 {
             color: var(--text-accent);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 1.1rem;
+            font-size: 1rem;
+        }
+
+        @media (min-width: 1200px) {
+            .sidebar-card h3 {
+                margin-bottom: 1rem;
+                font-size: 1.1rem;
+            }
         }
 
         .feature-list {
@@ -597,13 +838,21 @@
         }
 
         .feature-list li {
-            padding: 0.8rem 0;
+            padding: 0.6rem 0;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        @media (min-width: 1200px) {
+            .feature-list li {
+                padding: 0.8rem 0;
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
         }
 
         .feature-list li:last-child {
@@ -612,26 +861,41 @@
 
         .feature-list li::before {
             content: '✨';
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
-        /* Botones de acción */
+        @media (min-width: 1200px) {
+            .feature-list li::before {
+                font-size: 1rem;
+            }
+        }
+
+        /* Botones de acción mejorados */
         .btn-primary {
             background: var(--primary-gradient);
             border: none;
             border-radius: var(--border-radius);
-            padding: 1rem 1.5rem;
+            padding: 0.75rem 1.25rem;
             color: white;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
             width: 100%;
-            margin-top: 1rem;
+            margin-top: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
             text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .btn-primary {
+                padding: 1rem 1.5rem;
+                margin-top: 1rem;
+                font-size: 1rem;
+            }
         }
 
         .btn-primary:hover {
@@ -639,7 +903,40 @@
             box-shadow: var(--shadow-hover);
         }
 
-        /* Modal */
+        /* Form inputs mejorados para móvil */
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .form-input {
+                padding: 0.875rem;
+                font-size: 1rem;
+            }
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        @media (min-width: 768px) {
+            .form-label {
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        /* Modal mejorado para móvil */
         .modal {
             display: none;
             position: fixed;
@@ -650,20 +947,35 @@
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(5px);
             z-index: 10000;
-            padding: 2rem;
+            padding: 1rem;
             justify-content: center;
             align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .modal {
+                padding: 2rem;
+            }
         }
 
         .modal-content {
             background: var(--bg-card);
             border-radius: var(--border-radius);
-            padding: 2rem;
-            max-width: 500px;
+            padding: 1.5rem;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
             margin: auto;
             position: relative;
             animation: modalSlide 0.3s ease;
             color: var(--text-primary);
+        }
+
+        @media (min-width: 768px) {
+            .modal-content {
+                padding: 2rem;
+                max-width: 500px;
+            }
         }
 
         @keyframes modalSlide {
@@ -673,42 +985,72 @@
 
         .modal-close {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 0.75rem;
+            right: 0.75rem;
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             cursor: pointer;
             color: var(--text-secondary);
+            padding: 0.25rem;
         }
 
-        /* Toast Notifications */
+        @media (min-width: 768px) {
+            .modal-close {
+                top: 1rem;
+                right: 1rem;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Toast Notifications mejorado */
         .toast-container {
             position: fixed;
-            bottom: 20px;
+            bottom: 90px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 10001;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
+            max-width: 90vw;
+        }
+
+        @media (min-width: 768px) {
+            .toast-container {
+                bottom: 20px;
+                gap: 10px;
+                max-width: none;
+            }
         }
 
         .toast {
             background-color: var(--bg-card);
             color: var(--text-primary);
-            padding: 12px 20px;
+            padding: 10px 16px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             opacity: 0;
             animation: toastFadeIn 0.5s forwards, toastFadeOut 0.5s 4.5s forwards;
-            min-width: 250px;
+            min-width: 200px;
+            max-width: 90vw;
             text-align: center;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             border-left: 5px solid transparent;
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .toast {
+                padding: 12px 20px;
+                min-width: 250px;
+                max-width: none;
+                gap: 10px;
+                font-size: 0.9rem;
+            }
         }
 
         .toast.success {
@@ -731,40 +1073,19 @@
             to { opacity: 0; transform: translateY(-20px); }
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-content {
-                padding: 0 1rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .main-card {
-                padding: 1.5rem;
-            }
-            .categories-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-            .platform-tabs {
-                justify-content: center;
-            }
-            .presets-grid {
-                grid-template-columns: 1fr;
-            }
-            .card-title {
-                font-size: 1.8rem;
-            }
-        }
+        /* Utility classes */
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mt-6 { margin-top: 1.5rem; }
+        .ml-2 { margin-left: 0.5rem; }
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .gap-4 { gap: 1rem; }
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 0.5rem;
-            }
-            .upload-area {
-                padding: 2rem 1rem;
-            }
-            .categories-grid {
-                grid-template-columns: 1fr;
-            }
+        @media (min-width: 768px) {
+            .md\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
     </style>
 </head>
@@ -774,28 +1095,21 @@
             <div class="logo">SocialResize Pro</div>
             <div class="header-actions">
                 <button class="btn-header" onclick="toggleBatchMode()">
-                    <span>📦</span> Lote
+                    <span>📦</span> <span class="hidden md:inline">Lote</span>
                 </button>
                 <button class="btn-header" onclick="toggleTheme()">
-                    <span id="theme-icon">🌙</span> Tema
+                    <span id="theme-icon">🌙</span> <span class="hidden md:inline">Tema</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Anuncio Superior Sticky (728x90) - Máxima visibilidad -->
+    <!-- Anuncio Superior Sticky - Lemonpier -->
     <div class="ad-header-sticky">
         <div class="ad-container">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'b84a9fd773763386a1683b93e0df4712',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//www.highperformanceformat.com/b84a9fd773763386a1683b93e0df4712/invoke.js"></script>
+            <div class="lemonpier-ad">
+                <div id="container-0b7c19b272f3bde56c43dc01aa25544b"></div>
+            </div>
         </div>
     </div>
 
@@ -807,24 +1121,19 @@
                 
                 <div class="upload-area" id="uploadArea">
                     <div class="upload-icon">🖼️</div>
-                    <div class="upload-text">Arrastra tu imagen aquí o haz clic para seleccionar</div>
+                    <div class="upload-text">Arrastra tu imagen aquí o toca para seleccionar</div>
                     <div class="upload-hint">Soporta JPG, PNG, WebP, GIF, SVG hasta 50MB</div>
                     <input type="file" id="fileInput" accept="image/*" style="display: none;">
                 </div>
 
-                <!-- Anuncio entre contenido principal (300x250) - Muy efectivo -->
+                <!-- Anuncio entre contenido principal - Lemonpier -->
                 <div class="ad-content-break">
                     <div class="ad-container">
-                        <script type="text/javascript">
-                            atOptions = {
-                                'key' : '19fcf0a9e4d8268bc2cb5e0e23d153c9',
-                                'format' : 'iframe',
-                                'height' : 250,
-                                'width' : 300,
-                                'params' : {}
-                            };
-                        </script>
-                        <script type="text/javascript" src="//www.highperformanceformat.com/19fcf0a9e4d8268bc2cb5e0e23d153c9/invoke.js"></script>
+                        <div class="lemonpier-ad">
+                            <a href="https://lemonpier.com/xhbdqk68?key=72df134c5e809444a313ba0ec0fcd343" target="_blank" style="text-decoration: none; color: var(--text-accent); font-size: 0.9rem; padding: 1rem; display: block; text-align: center; border-radius: 8px; background: rgba(102, 126, 234, 0.1); transition: all 0.3s ease;">
+                                🚀 Mejora tu experiencia con herramientas premium
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -861,44 +1170,44 @@
                             
                             <div class="platform-tabs">
                                 <button class="platform-tab active" data-platform="social">
-                                    📱 Redes Sociales
+                                    📱 <span class="hidden sm:inline">Redes</span>
                                 </button>
                                 <button class="platform-tab" data-platform="documents">
-                                    📄 Documentos
+                                    📄 <span class="hidden sm:inline">Documentos</span>
                                 </button>
                                 <button class="platform-tab" data-platform="business">
-                                    💼 Empresarial
+                                    💼 <span class="hidden sm:inline">Empresarial</span>
                                 </button>
                                 <button class="platform-tab" data-platform="print">
-                                    🖨️ Impresión
+                                    🖨️ <span class="hidden sm:inline">Impresión</span>
                                 </button>
                                 <button class="platform-tab" data-platform="passport">
-                                    🛂 Pasaporte
+                                    🛂 <span class="hidden sm:inline">Pasaporte</span>
                                 </button>
                                 <button class="platform-tab" data-platform="id">
-                                    🆔 Identificación
+                                    🆔 <span class="hidden sm:inline">ID</span>
                                 </button>
                             </div>
 
                             <div class="presets-grid" id="presetsGrid">
-                                </div>
+                            </div>
                         </div>
 
                         <div id="customResizeSection" class="presets-section hidden">
                             <div class="presets-title">📐 Redimensión Personalizada</div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <label for="customWidth" class="block text-sm font-medium text-text-secondary mb-1">Ancho (px):</label>
-                                    <input type="number" id="customWidth" class="w-full p-2 rounded-md bg-bg-secondary border border-border-color text-text-primary" placeholder="Ej: 800">
+                                    <label for="customWidth" class="form-label">Ancho (px):</label>
+                                    <input type="number" id="customWidth" class="form-input" placeholder="Ej: 800">
                                 </div>
                                 <div>
-                                    <label for="customHeight" class="block text-sm font-medium text-text-secondary mb-1">Alto (px):</label>
-                                    <input type="number" id="customHeight" class="w-full p-2 rounded-md bg-bg-secondary border border-border-color text-text-primary" placeholder="Ej: 600">
+                                    <label for="customHeight" class="form-label">Alto (px):</label>
+                                    <input type="number" id="customHeight" class="form-input" placeholder="Ej: 600">
                                 </div>
                             </div>
                             <div class="mb-4">
-                                <label for="exportFormat" class="block text-sm font-medium text-text-secondary mb-1">Formato de Exportación:</label>
-                                <select id="exportFormat" class="w-full p-2 rounded-md bg-bg-secondary border border-border-color text-text-primary">
+                                <label for="exportFormat" class="form-label">Formato de Exportación:</label>
+                                <select id="exportFormat" class="form-input">
                                     <option value="png">PNG</option>
                                     <option value="jpeg">JPG</option>
                                     <option value="webp">WebP</option>
@@ -911,7 +1220,7 @@
 
                         <div id="aiSection" class="presets-section hidden">
                             <div class="presets-title">🤖 Funciones de IA Avanzada</div>
-                            <p class="text-text-secondary mb-4">Selecciona una función de IA para aplicar a tu imagen.</p>
+                            <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">Selecciona una función de IA para aplicar a tu imagen.</p>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div class="preset-card" onclick="applyAIFeature('Eliminar Fondo')">
                                     <div class="preset-header">
@@ -936,64 +1245,60 @@
                     </button>
                 </div>
 
-                <!-- Anuncio después del contenido principal (468x60) - Buena posición -->
+                <!-- Anuncio después del contenido principal - Lemonpier -->
                 <div class="ad-content-break">
                     <div class="ad-container">
-                        <script type="text/javascript">
-                            atOptions = {
-                                'key' : '430b0049a61223d405a30c18abd39546',
-                                'format' : 'iframe',
-                                'height' : 60,
-                                'width' : 468,
-                                'params' : {}
-                            };
-                        </script>
-                        <script type="text/javascript" src="//www.highperformanceformat.com/430b0049a61223d405a30c18abd39546/invoke.js"></script>
+                        <div class="lemonpier-ad">
+                            <a href="https://lemonpier.com/xhbdqk68?key=72df134c5e809444a313ba0ec0fcd343" target="_blank" style="text-decoration: none; color: var(--text-accent); font-size: 0.85rem; padding: 0.75rem; display: block; text-align: center; border-radius: 8px; background: rgba(102, 126, 234, 0.08); transition: all 0.3s ease;">
+                                ⭐ Descubre más herramientas de edición
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
 
         <aside class="sidebar">
-            <!-- Anuncio en sidebar (300x250) - Posición estratégica -->
-            <div class="ad-sidebar">
+            <!-- Anuncio en sidebar - Solo desktop -->
+            <div class="ad-sidebar hidden lg:block">
                 <div class="ad-container">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key' : '19fcf0a9e4d8268bc2cb5e0e23d153c9',
-                            'format' : 'iframe',
-                            'height' : 250,
-                            'width' : 300,
-                            'params' : {}
-                        };
-                    </script>
-                    <script type="text/javascript" src="//www.highperformanceformat.com/19fcf0a9e4d8268bc2cb5e0e23d153c9/invoke.js"></script>
+                    <div class="lemonpier-ad">
+                        <a href="https://lemonpier.com/xhbdqk68?key=72df134c5e809444a313ba0ec0fcd343" target="_blank" style="text-decoration: none; color: var(--text-accent); font-size: 0.9rem; padding: 1rem; display: block; text-align: center; border-radius: 8px; background: rgba(102, 126, 234, 0.1); transition: all 0.3s ease;">
+                            🎯 Herramientas Premium
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <div class="sidebar-card">
                 <h3>💬 Lo que dicen nuestros usuarios</h3>
-                <blockquote style="color: var(--text-secondary); font-style: italic; margin-bottom: 1rem;">
+                <blockquote style="color: var(--text-secondary); font-style: italic; margin-bottom: 1rem; font-size: 0.9rem;">
                     "SocialResize Pro ha transformado mi flujo de trabajo. ¡Impresionante!"
                 </blockquote>
-                <p style="font-weight: 600;">— María G., Diseñadora Gráfica</p>
+                <p style="font-weight: 600; font-size: 0.85rem;">— María G., Diseñadora Gráfica</p>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>🌟 Características</h3>
+                <ul class="feature-list">
+                    <li>Redimensión inteligente</li>
+                    <li>Presets optimizados</li>
+                    <li>Múltiples formatos</li>
+                    <li>Calidad profesional</li>
+                    <li>Interfaz intuitiva</li>
+                </ul>
             </div>
         </aside>
     </div>
 
-    <!-- Anuncio móvil inferior fijo (320x50) - Solo móviles -->
+    <!-- Anuncio móvil inferior fijo - Lemonpier -->
     <div class="ad-mobile-bottom">
         <div class="ad-container">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '3930d947f3ba430a144de6a407147e2e',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//www.highperformanceformat.com/3930d947f3ba430a144de6a407147e2e/invoke.js"></script>
+            <div class="lemonpier-ad">
+                <a href="https://lemonpier.com/xhbdqk68?key=72df134c5e809444a313ba0ec0fcd343" target="_blank" style="text-decoration: none; color: var(--text-accent); font-size: 0.8rem; padding: 0.5rem; display: block; text-align: center; border-radius: 6px; background: rgba(102, 126, 234, 0.1); transition: all 0.3s ease;">
+                    🚀 Mejora tu experiencia
+                </a>
+            </div>
         </div>
     </div>
 
@@ -1045,13 +1350,13 @@
             modal.innerHTML = `
                 <div class="modal-content">
                     <button class="modal-close" onclick="this.closest('.modal').remove()">&times;</button>
-                    <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
                         📦 Modo Lote Avanzado
                     </h2>
-                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.9rem; line-height: 1.5;">
                         Sube múltiples imágenes y aplica presets a todas a la vez.
                     </p>
-                    <input type="file" multiple accept="image/*" style="display: block; margin: 1rem auto; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary);">
+                    <input type="file" multiple accept="image/*" class="form-input" style="margin-bottom: 1rem;">
                     <button class="btn-primary" onclick="showToast('Procesando imágenes en lote...', 'info'); this.closest('.modal').remove();">
                         Procesar en Lote <span class="ml-2">⚙️</span>
                     </button>
@@ -1067,11 +1372,11 @@
             if (body.getAttribute('data-theme') === 'dark') {
                 body.setAttribute('data-theme', 'light');
                 themeIcon.textContent = '☀️';
-                trackUserInteraction('theme_changed', 'light');
+                trackUserInteraction('theme_changed', { theme: 'light' });
             } else {
                 body.setAttribute('data-theme', 'dark');
                 themeIcon.textContent = '🌙';
-                trackUserInteraction('theme_changed', 'dark');
+                trackUserInteraction('theme_changed', { theme: 'dark' });
             }
         }
 
@@ -1110,9 +1415,11 @@
         function selectEditingMode(mode) {
             currentEditingMode = mode;
             trackUserInteraction('editing_mode_selected', { mode });
+            
             const presetsSection = document.getElementById('presetsSection');
             const customResizeSection = document.getElementById('customResizeSection');
             const aiSection = document.getElementById('aiSection');
+            
             presetsSection.classList.add('hidden');
             customResizeSection.classList.add('hidden');
             aiSection.classList.add('hidden');
@@ -1186,10 +1493,12 @@
             const presetsGrid = document.getElementById('presetsGrid');
             presetsGrid.innerHTML = '';
             const presets = presetsData[platform] || [];
+            
             if (presets.length === 0) {
-                presetsGrid.innerHTML = '<p style="color: var(--text-secondary);">No hay presets disponibles.</p>';
+                presetsGrid.innerHTML = '<p style="color: var(--text-secondary); text-align: center; grid-column: 1/-1;">No hay presets disponibles.</p>';
                 return;
             }
+            
             presets.forEach(preset => {
                 const presetCard = document.createElement('div');
                 presetCard.className = 'preset-card';
@@ -1226,7 +1535,7 @@
             showToast('Preparando tu imagen...', 'info');
 
             const img = new Image();
-            img.crossOrigin = "Anonymous";
+            img.crossOrigin = "anonymous";
             img.onload = () => {
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
@@ -1253,6 +1562,35 @@
             img.src = currentImageUrl;
         }
 
+        // === TOUCH AND MOBILE OPTIMIZATIONS ===
+        function initializeMobileOptimizations() {
+            // Mejorar el touch en dispositivos móviles
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // Añadir clase para optimizaciones móviles
+                document.body.classList.add('mobile-device');
+                
+                // Optimizar el viewport para evitar zoom en inputs
+                const viewport = document.querySelector('meta[name="viewport"]');
+                if (viewport) {
+                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+                }
+                
+                // Mejorar los event listeners para touch
+                const touchElements = document.querySelectorAll('.category-card, .preset-card, .btn-primary, .platform-tab');
+                touchElements.forEach(element => {
+                    element.addEventListener('touchstart', function() {
+                        this.style.transform = 'scale(0.98)';
+                    }, { passive: true });
+                    
+                    element.addEventListener('touchend', function() {
+                        this.style.transform = '';
+                    }, { passive: true });
+                });
+            }
+        }
+
         // === INITIALIZATION ===
         document.addEventListener('DOMContentLoaded', () => {
             const uploadArea = document.getElementById('uploadArea');
@@ -1261,9 +1599,14 @@
             const editingControlsSection = document.getElementById('editingControlsSection');
             const downloadImageBtn = document.getElementById('downloadImageBtn');
 
+            // Inicializar optimizaciones móviles
+            initializeMobileOptimizations();
+
+            // Event listeners
             document.querySelectorAll('.platform-tab').forEach(tab => {
                 tab.addEventListener('click', handlePlatformTabClick);
             });
+            
             uploadArea.addEventListener('click', () => fileInput.click());
 
             fileInput.addEventListener('change', (event) => {
@@ -1289,19 +1632,30 @@
                 }
             });
 
+            // Drag and drop functionality
             function preventDefaults(e) {
                 e.preventDefault();
                 e.stopPropagation();
             }
+            
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 document.body.addEventListener(eventName, preventDefaults, false);
             });
+            
             ['dragenter', 'dragover'].forEach(eventName => {
-                uploadArea.addEventListener(eventName, () => uploadArea.style.borderColor = 'var(--text-accent)', false);
+                uploadArea.addEventListener(eventName, () => {
+                    uploadArea.style.borderColor = 'var(--text-accent)';
+                    uploadArea.style.backgroundColor = 'rgba(102, 126, 234, 0.1)';
+                }, false);
             });
+            
             ['dragleave', 'drop'].forEach(eventName => {
-                uploadArea.addEventListener(eventName, () => uploadArea.style.borderColor = 'var(--border-color)', false);
+                uploadArea.addEventListener(eventName, () => {
+                    uploadArea.style.borderColor = 'var(--border-color)';
+                    uploadArea.style.backgroundColor = 'var(--bg-preset)';
+                }, false);
             });
+            
             uploadArea.addEventListener('drop', (e) => {
                 preventDefaults(e);
                 const dt = e.dataTransfer;
@@ -1310,6 +1664,7 @@
                 fileInput.dispatchEvent(new Event('change'));
             }, false);
             
+            // Render initial presets
             renderPresets('social');
         });
     </script>
